@@ -1,0 +1,108 @@
+.email {
+    width: 100vw;
+    height: 100vh;
+    background: #DDE9F6;
+}
+.email {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    /* justify-content: center; */
+    align-items: center;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+.email .email_contents {
+    width: 90%;
+    height: auto;
+    margin-top: 20px;
+}
+.email_contents, .email_main {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: center;
+}
+
+.email_main {
+    width: 500px;
+    height: auto;
+    margin-top: 30px;
+}
+.email_main .email_main_contents {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.email .email_top {
+    width: 80%;
+    height: auto;
+}
+.email_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+.email_top .message, .email_top .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #0076F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.avatar img {
+    width: 80%;
+    height: 80%;
+}
+.email_main h1 {
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1.5rem;
+}
+.email_main > span {
+    font-size: 15px;
+    font-weight: 550;
+    line-height: 1.5rem;
+}
+.email_main .email_button {
+    width: 80%;
+    height: auto;
+    margin-top: 20px;
+    margin-left: -90px;
+}
+.email_base {
+    width: 500px;
+    display: flex;
+    margin-top: 20px;
+}
+.email_route {
+    margin-left: 10px;
+    text-decoration: none;
+}
+.email_main_contents input {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 15px 20px;
+    background: none;
+    border-radius: 10px;
+    font-size: 18px;
+    outline: none;
+    border: 1px solid black;
+}
+.email_main_contents input:focus {
+    border: 1px solid blue;
+}
+
+
+@media screen and (max-width: 500px) {
+    .email_contents .email_main,
+    .email_contents .email_base {
+        width: 100%;
+    }
+}

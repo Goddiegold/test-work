@@ -1,0 +1,189 @@
+.account_setup {
+    width: 100vw;
+    height: 100vh;
+    background: #DDE9F6;
+    overflow-x: hidden;
+}
+.account_setup {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    /* justify-content: center; */
+    align-items: center;
+    /* overflow-y: scroll; */
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+.account_setup .account_setup_top {
+    width: 80%;
+    height: auto;
+}
+.account_setup_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+.account_setup_top .message, .account_setup_top .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #0076F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.avatar img {
+    width: 80%;
+    height: 80%;
+}
+
+.account_setup .account_setup_fields {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.account_setup_fields {
+    height: auto;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+.account_setup_fields .account_setup_fields_contents {
+    width: 40rem;
+    height: auto;
+    margin-top: 30px2
+}
+.account_setup_fields_contents, 
+.account_setup_fields_contents form {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+
+.account_setup_fields_contents h1 {
+    font-size: 21px;
+    margin: 30px 0px 0px 0px;
+    line-height: 0rem;
+    text-align: center;
+    padding: 0;
+    font-weight: bold;
+}
+.account_setup_fields_contents .small_light {
+    color: #8D8D8D;
+    font-size: 15px;
+    margin-top: 10px;
+}
+.account_setup_fields_contents form {
+    margin-top: 30px;
+    width: 100%;
+    height: auto;
+}
+.account_setup_fields_contents form .input_field {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+.input_field label,
+.input_field .input,
+.input_field .input_password {
+    width: 100%;
+    height: auto;
+    line-height: 1.4rem;
+}
+.input_field label {
+    font-size: 18px;
+    font-weight: 650;
+    color: #000000;
+}
+.input, .input_password {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FEFEFE;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    padding: 0px 10px 0px 0px;
+}
+.input input {
+    width: 100%;
+}
+.input .select {
+    height: auto;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+}
+.input_password input {
+    width: 90%;
+}
+.input input,
+.input_password input {
+    height: auto;
+    box-sizing: border-box;
+    padding: 15px;
+    border: none;
+    margin-left: 7px;
+    outline: none;
+    background-color: none;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+.input_password svg {
+    cursor: pointer;
+}
+.input input::placeholder,
+.input_password input::placeholder {
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+}
+.input:focus-within,
+.input_password:focus-within {
+    border: 1px solid #0076F7;
+}
+.account_setup_fields_contents form .account_setup_button {
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+}
+.account_setup_button input {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 15px 0px;
+    text-align: center;
+    color: white;
+    background: #0076F7;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    background-color: none;
+    font-weight: 650;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.account_setup_button input:hover {
+    background: #3992f0;
+}
+.account_setup_fields_contents .account_setup_bottom {
+    width: 100%;
+    display: flex;
+    margin-top: 30px;
+}
+
+/* @media screen and (max-width: 1009px) {
+    .account_setup_fields .account_setup_fields_contents {
+        width: 90%;
+    }
+} */
+@media screen and (max-width: 769px) {
+    .account_setup .account_setup_fields {
+        width: 100%;
+    }
+    .account_setup_fields .account_setup_fields_contents {
+        width: 90%;
+    }
+}

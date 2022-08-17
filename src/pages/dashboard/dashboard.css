@@ -1,0 +1,12 @@
+.dashboard {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+.dashboard .dashboard_contents {
+    width: 100%;
+    height: calc(100% - 90px);
+    display: flex;
+}

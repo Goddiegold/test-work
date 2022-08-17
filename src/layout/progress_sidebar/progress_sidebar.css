@@ -1,0 +1,93 @@
+.PS {
+    display: flex;
+    /* align-items: center; */
+    width: 450px;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 50px 0px;
+    transition: width 1s ease-in-out;
+    background: #0076F7;
+    position: relative;
+    font-family: 'Fira Sans';
+}
+.PS .PS_wrapper {
+    width: 70%;
+    /* height: 100%; */
+}
+.PS_wrapper .PS_content, .PS_content .progress,
+.progress .progress_tree, .progress_tree .progression {
+    width: 100%;
+    height: auto;
+}
+.PS_content h1, .PS_content span {
+    color: white;
+}
+.PS_content h1 {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1rem;
+}
+.progress {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+.progress_tree {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    position: relative;
+    margin-top: 30px;
+}
+.progression {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px 0px;
+}
+.progression span, .progression div {
+    margin-left: 10px;
+}
+.progress_info {
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    padding: 5px 8px;
+    border-radius: 15px;
+    background-color: #fff;
+    color: #2C75D3;
+    font-size: 14px;
+}
+.threads {
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    height: 63px;
+    width: 1px;
+    top: 28px;
+    left: 5px;
+}
+.PS_base {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+}
+.PS_base .PS_base_txt {
+    width: 70%;
+    display: flex;
+}
+.PS_span {
+    font-size: 16px;
+    /* font-family: "Poppins"; */
+    font-family: 'Inter';
+    font-weight: 550;
+    color: white;
+}
+@media screen and (max-width: 830px) {
+    .PS {
+        width: 40%;
+    }
+}

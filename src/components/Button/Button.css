@@ -1,0 +1,16 @@
+.button_link {
+    width: 100%;
+    height: auto;
+    background: #0076F7;
+    color: white;
+    box-sizing: border-box;
+    padding: 15px 0px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.button_link:hover {
+    background: #68aef8;
+}
