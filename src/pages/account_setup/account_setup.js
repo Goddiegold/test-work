@@ -2,22 +2,43 @@ import React, { useState } from "react";
 import "./account_setup.css";
 import image2 from "../../assets/Ellipse 5.png";
 import Select from "react-select";
+import { CountryRegionData } from "react-country-region-selector";
 import Data from "./setupData";
 
 const AccountSetup = () => {
 
     const [state, setState] = useState({});
+    const [regionData, setRegionData] = useState([]);
+    // const [country, setCountry] = useState("");
+    const countriesData = CountryRegionData.map(c => {
+        return {
+            value: c[0],
+            label: c[0]
+        }
+    });
 
     const handleSelect = (name, val) => {
+        if(name == "country") {
+            const regions = CountryRegionData.find(c => c[0] == val.value)[2].split("|");
+            const options = regions.map(region => {
+                const splitted = region.split("~");
+                return {
+                    value: splitted[0],
+                    label: splitted[0]
+                }
+            });
+            // console.log(options)
+            setRegionData(options);
+        }
         setState({
             ...state,
-            name: val
-        })
+            name: val.value
+        });
     }
     const handleMultiSelect = (name, val) => {
         setState({
             ...state,
-            name: state.name ? [...state.name, val] : [val]
+            name: state.name ? [...state.name, val.value] : [val.value]
         })
     }
     const customStyles = {
@@ -74,21 +95,28 @@ const AccountSetup = () => {
                         </div>
                         <div className="input_field">
                             <label>Location</label>
-                            <div className="input">
-                                <input placeholder="Nigeria" 
-                                type="text"
-                                required />
-                            </div>
-                        </div>
-                        <div className="input_field">
-                            <label>Your State</label>
-                            <div className="input" style={{background: "none", padding:"0px"}}>
+                            <div className="input" 
+                            style={{background: "none", padding:"0px", border: "none"}}>
                                 <Select 
                                 className="select"
                                 width="100%"
                                 styles={customStyles}
-                                options={Data.states}
-                                isClearable={true}
+                                options={countriesData}
+                                isSearchable={true}
+                                onChange={(val) => handleSelect("country", val)}
+                                closeMenuOnSelect={true}
+                                />
+                            </div>
+                        </div>
+                        <div className="input_field">
+                            <label>Your State</label>
+                            <div className="input" 
+                            style={{background: "none", padding:"0px", border: "none"}}>
+                                <Select 
+                                className="select"
+                                width="100%"
+                                styles={customStyles}
+                                options={regionData}
                                 isSearchable={true}
                                 onChange={(val) => handleSelect("state", val)}
                                 closeMenuOnSelect={true}
@@ -106,6 +134,7 @@ const AccountSetup = () => {
                                 isClearable={true}
                                 isSearchable={true}
                                 onChange={(val) => handleMultiSelect("jobs", val)}
+                                isOptionDisabled={() => state.jobs.length == 3}
                                 />
                             </div>
                         </div>

@@ -13,10 +13,10 @@ const Dashboard = () => {
     }
     return (
         <div className="dashboard">
-            <Header toggleSidebar={toggleSidebar} />
+            <Header toggleSidebar={toggleSidebar} full={full} />
             <Routes>
                 <Route path="/" element={<DashboardHome full={full} />} />
-                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects" element={<Projects full={full} />} />
             </Routes>
             
         </div>

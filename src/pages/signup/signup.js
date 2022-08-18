@@ -11,6 +11,7 @@ const Signup = () => {
 
     return (
         <div className="signup">
+            <Banner />
             <div className="signup_fields">
                 <div className="signup_fields_contents">
                     <div className="logo_brand">
@@ -83,7 +84,6 @@ const Signup = () => {
                     </div>
                 </div>
             </div>
-            <Banner />
         </div>
     )
 }
