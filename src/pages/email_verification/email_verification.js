@@ -13,9 +13,9 @@ const [code,setCode] = useState("")
 const {state} = useLocation()
 const navigate = useNavigate()
     
-useEffect(()=>{
-    if(!state?.usrEmail) return navigate("/login")
-},[])
+// useEffect(()=>{
+//     if(!state?.usrEmail) return navigate("/login")
+// },[])
 
 function handleAccountVerification(){
     if(!code) return toast.info("Enter the code send to you mail")
@@ -23,6 +23,7 @@ function handleAccountVerification(){
         verifyAccount(code).then(res=>{
             console.log(res)
             toast.success(res.data)
+            navigate("/login")
         }).catch(err=>{
             console.log(err)
             toast.error(err.response.data)
@@ -50,7 +51,7 @@ function handleAccountVerification(){
                 <div className="email_main">
                     <h1>Verify your email</h1>
                     <span>
-                        We’ve sent a special verification code to {state?.usrEmail}.  {" "}
+                        We’ve sent a special verification code to your mail.  {" "}
                         Please check for the code and enter below.
                     </span>
                     <div className="email_main_contents">

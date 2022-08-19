@@ -23,7 +23,7 @@ axios.interceptors.response.use(null, (error) => {
 
 
 const instance = axios.create({
-    baseURL:"http://localhost:6777/api"
+    baseURL:"https://qu4s5quvaz.us-east-1.awsapprunner.com/api"
 })
 
 export default instance;

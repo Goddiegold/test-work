@@ -5,6 +5,7 @@ import "./styles.css";
 import {login} from "../../services/userService";
 import {UserContext, USER_TOKEN} from "../../context/UserContext"
 import { toast } from "react-toastify";
+import logo from "../../assets/logo.png";
 
 const Login = () => {
 
@@ -63,7 +64,7 @@ if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") retu
             <div className="signup_fields">
                 <div className="signup_fields_contents">
                     <div className="logo_brand">
-                        <span>yaarnbox</span>
+                       <img src={logo} alt="" style={{width:"300px",marginLeft:"-25px"}}/>
                     </div>
                     <h2>Login to your account</h2>
                     <span className="small_light"

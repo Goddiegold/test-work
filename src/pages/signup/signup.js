@@ -3,7 +3,8 @@ import Banner from "../../components/Banner/Banner";
 import { Link, useNavigate } from "react-router-dom";
 import "./signup.css";
 import {register} from "../../services/userService";
-
+import { toast } from "react-toastify";
+import logo from "../../assets/logo.png";
 
 const Signup = () => {
 
@@ -28,9 +29,11 @@ const navigate = useNavigate()
         e.preventDefault()
         register(user).then(res=>{
             console.log(res)
+            toast.success("Your account has been created successfully!",{position:"top-center"})
      navigate("/verify-account",{state:{usrEmail:res.data.email}})
         }).catch(err=>{
             console.log(err)
+            toast.error(err.response.data)
         })
        
     }
@@ -41,7 +44,7 @@ const navigate = useNavigate()
             <div className="signup_fields">
                 <div className="signup_fields_contents">
                     <div className="logo_brand">
-                        <span>yaarnbox</span>
+                    <img src={logo} alt="" style={{width:"300px",marginLeft:"-25px"}}/>
                     </div>
                     <h2>Create an account</h2>
                     <span className="small_light"
