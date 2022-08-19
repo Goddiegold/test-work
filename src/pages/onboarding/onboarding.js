@@ -1,15 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import './onboarding.css';
 import Button from "../../components/Button/Button";
 import image from "../../assets/Ellipse 4.png";
 import image2 from "../../assets/Ellipse 5.png";
+import {UserContext} from "../../context/UserContext";
+import { toast } from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const Onboarding = () => {
-
-    const user="Emmanuel";
     const [selected, setSelected] = useState(null);
     const ref1 = useRef(null);
     const ref2 = useRef(null);
+    const navigate = useNavigate()
 
     const handleClick = (e) => {
         if(ref1.current && ref2.current) {
@@ -20,6 +22,21 @@ const Onboarding = () => {
         }
     }
 
+
+        const {user:userDetails,userTokenDetails} = useContext(UserContext)
+
+        useEffect(()=>{
+    if(userTokenDetails?.accountConfigured) return navigate("/dashboard")
+    if(!userTokenDetails?.accountType) return navigate("/login")
+        },[]) 
+
+    function handleOnClick(){
+        if(selected && selected==="worker"){
+            return toast.success("Worker's experience still in development")
+        }else if(selected && selected==="business"){
+            navigate("/account_setup")
+        }
+    }
     return (
         <div className="onboarding" onClick={handleClick}>
             <div className="onboarding_top">
@@ -38,7 +55,7 @@ const Onboarding = () => {
             </div>
             <div className="onboarding_contents">
                 <div className="onboarding_main">
-                    <h1>Hi {user},</h1>
+                    <h1>Hi {userDetails.user?userDetails.user.name:""},</h1>
                     <h1>How would you love to use yaarnbox?</h1>
                     <div className="onboarding_main_contents">
                         <div className="sections" onClick={() => setSelected("worker")} ref={ref1}
@@ -95,7 +112,7 @@ const Onboarding = () => {
                         </div>
                     </div>
                     <div className="onboarding_button">
-                        <Button text="Continue" />
+                        <Button text="Continue" onClick={handleOnClick}/>
                     </div>
                 </div>
             </div>

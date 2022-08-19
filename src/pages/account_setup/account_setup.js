@@ -1,46 +1,48 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./account_setup.css";
 import image2 from "../../assets/Ellipse 5.png";
 import Select from "react-select";
-import { CountryRegionData } from "react-country-region-selector";
+import { CountryDropdown } from "react-country-region-selector";
+import stateCountry from "state-country";
 import Data from "./setupData";
+import { toast } from "react-toastify";
+import { registerClient } from "../../services/userService";
+import { UserContext,USER_TOKEN } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const AccountSetup = () => {
 
-    const [state, setState] = useState({});
+    //const [state, setState] = useState({});
     const [regionData, setRegionData] = useState([]);
-    // const [country, setCountry] = useState("");
-    const countriesData = CountryRegionData.map(c => {
-        return {
-            value: c[0],
-            label: c[0]
-        }
-    });
+const navigate = useNavigate();
+    const {userTokenDetails, userTokenDetailsDispatch} = useContext(UserContext)
 
-    const handleSelect = (name, val) => {
-        if(name == "country") {
-            const regions = CountryRegionData.find(c => c[0] == val.value)[2].split("|");
-            const options = regions.map(region => {
-                const splitted = region.split("~");
-                return {
-                    value: splitted[0],
-                    label: splitted[0]
-                }
-            });
-            // console.log(options)
-            setRegionData(options);
-        }
-        setState({
-            ...state,
-            name: val.value
-        });
-    }
-    const handleMultiSelect = (name, val) => {
-        setState({
-            ...state,
-            name: state.name ? [...state.name, val.value] : [val.value]
-        })
-    }
+
+
+    useEffect(()=>{
+if(userTokenDetails?.accountType==="participant"|| !userTokenDetails?.accountType) return navigate("/login")
+else if(userTokenDetails?.accountType==="client") return navigate("/dashboard")
+    },[userTokenDetails?.token&&userTokenDetails?.token])
+    const [info,setInfo] = useState({
+        companyName:"",
+        companyType:"",
+        country:"",
+        state:"No State",
+        userRole:""
+    })
+
+    const {
+        companyName,
+        companyType,
+        country,
+        state,
+        userRole
+    } = info; 
+
+    function returnState() {
+        return [...stateCountry.getAllStatesInCountry(country)];
+      }
+
     const customStyles = {
         control: (styles) => ({
             ...styles,
@@ -57,6 +59,39 @@ const AccountSetup = () => {
         })
     }
 
+    function handleChange({target:{name,value}}){
+        const details = {...info};
+        details[name] = value;
+        setInfo(details)
+    }
+
+ function userMessage(countryState=[],country="") {
+        if (countryState.length > 0 && country === "") return "Select State";
+        else if (countryState.length === 0 && country === "") return "Select State";
+        else if (countryState.length > 0 && country.length > 0)
+          return "Select State";
+        else return "No State Available Here";
+     }
+
+     function handleSubmit(e){
+        e.preventDefault();
+        console.log(info);
+        if(userTokenDetails.token){
+        registerClient(info,userTokenDetails.token).then(res=>{
+             console.log(res)
+            userTokenDetailsDispatch({
+                type:USER_TOKEN,
+                payload:res.headers["auth-token"]
+            })
+            toast.success(res.data)
+            console.log(userTokenDetails)
+            navigate("/dashboard")
+        }).catch(err=>{
+            console.log(err)
+            toast.error(err.response.data)
+        })}
+     }
+    
     return (
         <div className="account_setup">
             <div className="account_setup_top">
@@ -76,20 +111,26 @@ const AccountSetup = () => {
             <div className="account_setup_fields">
                 <div className="account_setup_fields_contents">
                     <h1>Complete your setup</h1>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="input_field">
                             <label>Your Company name</label>
                             <div className="input">
-                                <input placeholder="Enter full name" 
+                                <input placeholder="Company name" 
                                 type="text"
+                                onChange={handleChange}
+                                name="companyName"
+                                value={companyName}
                                 required />
                             </div>
                         </div>
                         <div className="input_field">
                             <label>Your industry</label>
                             <div className="input">
-                                <input placeholder="Enter full name" 
+                                <input placeholder="Industry" 
                                 type="text"
+                                name="companyType"
+                                onChange={handleChange}
+                                value={companyType}
                                 required />
                             </div>
                         </div>
@@ -97,45 +138,37 @@ const AccountSetup = () => {
                             <label>Location</label>
                             <div className="input" 
                             style={{background: "none", padding:"0px", border: "none"}}>
-                                <Select 
-                                className="select"
-                                width="100%"
-                                styles={customStyles}
-                                options={countriesData}
-                                isSearchable={true}
-                                onChange={(val) => handleSelect("country", val)}
-                                closeMenuOnSelect={true}
-                                />
+                                 <CountryDropdown
+              value={country}
+              className="country"
+              onChange={
+                (val) =>
+              setInfo({ ...info, country: val })}
+              required
+            />
                             </div>
                         </div>
                         <div className="input_field">
                             <label>Your State</label>
                             <div className="input" 
                             style={{background: "none", padding:"0px", border: "none"}}>
-                                <Select 
-                                className="select"
-                                width="100%"
-                                styles={customStyles}
-                                options={regionData}
-                                isSearchable={true}
-                                onChange={(val) => handleSelect("state", val)}
-                                closeMenuOnSelect={true}
-                                />
+                                <select className="select" name="state" value={state} onChange={handleChange} required>
+                                        <option>{userMessage(returnState(),country)}</option>
+                                    {returnState().map((data,key)=>(
+                                        <option key={key} value={data.name}>{data.name}</option>
+                                    ))}
+                                </select>
                             </div>
                         </div>
                         <div className="input_field">
-                            <label>Your Job/role</label>
-                            <div className="input" style={{background: "none", padding:"0px"}}>
-                                <Select 
-                                isMulti
-                                className="select"
-                                styles={customStyles}
-                                options={Data.jobs}
-                                isClearable={true}
-                                isSearchable={true}
-                                onChange={(val) => handleMultiSelect("jobs", val)}
-                                isOptionDisabled={() => state.jobs.length == 3}
-                                />
+                            <label>Your industry</label>
+                            <div className="input">
+                                <input placeholder="Enter your job role" 
+                                onChange={handleChange}
+                                type="text"
+                                name="userRole"
+                                value={userRole}
+                                required />
                             </div>
                         </div>
                         <div className="account_setup_button">

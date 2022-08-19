@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./email_verification.css";
 import Button from "../../components/Button/Button";
 import image from "../../assets/Ellipse 4.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import image2 from "../../assets/Ellipse 5.png";
+import { verifyAccount } from "../../services/userService";
+import { toast } from "react-toastify";
 
 const EmailVerify = () => {
+const [code,setCode] = useState("")
+const {state} = useLocation()
+const navigate = useNavigate()
+    
+useEffect(()=>{
+    if(!state?.usrEmail) return navigate("/login")
+},[])
 
-    const user_email = "yaarn@yaarn.com";
+function handleAccountVerification(){
+    if(!code) return toast.info("Enter the code send to you mail")
+    if(code){
+        verifyAccount(code).then(res=>{
+            console.log(res)
+            toast.success(res.data)
+        }).catch(err=>{
+            console.log(err)
+            toast.error(err.response.data)
+        })
+    }
+}
 
     return (
         <div className="email">
@@ -29,14 +50,14 @@ const EmailVerify = () => {
                 <div className="email_main">
                     <h1>Verify your email</h1>
                     <span>
-                        We’ve sent a special verification code to {user_email} 
+                        We’ve sent a special verification code to {state?.usrEmail}.  {" "}
                         Please check for the code and enter below.
                     </span>
                     <div className="email_main_contents">
-                        <input placeholder="Enter verification code" type="text" />
+                        <input placeholder="Enter verification code" type="text" value={code} onChange={(e)=>setCode(e.target.value)}/>
                     </div>
                     <div className="email_button">
-                        <Button text="Verify" />
+                        <Button text="Verify" onClick={handleAccountVerification}/>
                     </div>
                 </div>
                 <div className="email_base">

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Banner from "../../components/Banner/Banner";
 import { Link, useNavigate } from "react-router-dom";
-import "./signup.css";
-import {register} from "../../services/userService";
+import "./styles.css";
+import {login} from "../../services/userService";
+import {UserContext, USER_TOKEN} from "../../context/UserContext"
+import { toast } from "react-toastify";
 
-
-const Signup = () => {
+const Login = () => {
 
 const [user,setUser] = useState({
-    name:"",
     email:"",
     password:""
 })
@@ -18,6 +18,11 @@ const {name,email,password} = user;
     // const [focused, setFocused] = useState(null);
 const navigate = useNavigate()
 
+const {userTokenDetails,userTokenDetailsDispatch} = useContext(UserContext)
+
+useEffect(()=>{
+if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") return navigate("/dashboard")
+},[])
     function handleFormInputChange({target:{name,value}}){
         const details = {...user}
         details[name] = value;
@@ -26,9 +31,26 @@ const navigate = useNavigate()
 
     function handleFormSubmit(e){
         e.preventDefault()
-        register(user).then(res=>{
+        login(user).then(res=>{
             console.log(res)
-     navigate("/verify-account",{state:{usrEmail:res.data.email}})
+            userTokenDetailsDispatch({
+                type:USER_TOKEN,
+                payload:res.headers["auth-token"]
+            })
+
+            if(!res.data.accountVerified) return toast.info("Check your mail to verify your account!",{position:"top-center"})
+
+            if(!res.data.accountConfigured && res.data.accountType==="new" && res.data.accountVerified){
+                toast.success("Logged in successfuly!")
+                return navigate("/onboarding")
+            }
+            
+            if(res.data.accountType==="participant") return toast.success("Participant experience in still in development!",{position:"top-center"})
+
+            if(res.data.accountType==="client"){
+                toast.success("Logged in successfuly!")
+                return navigate("/dashboard")
+            }
         }).catch(err=>{
             console.log(err)
         })
@@ -43,24 +65,12 @@ const navigate = useNavigate()
                     <div className="logo_brand">
                         <span>yaarnbox</span>
                     </div>
-                    <h2>Create an account</h2>
+                    <h2>Login to your account</h2>
                     <span className="small_light"
                     style={{marginTop: "20px"}}>
-                        Some Info
+                        
                     </span>
                     <form onSubmit={handleFormSubmit}>
-                        <div className="input_field">
-                            <label>Full name</label>
-                            <div className="input">
-                                <input placeholder="Enter full name" 
-                                type="text"
-                                name="name"
-                                required
-                                onChange={handleFormInputChange}
-                                value={name}
-                                minLength={5} />
-                            </div>
-                        </div>
                         <div className="input_field">
                             <label>Email</label>
                             <div className="input">
@@ -113,17 +123,17 @@ const navigate = useNavigate()
                             <input type="submit" title="Sign up" />
                         </div>
                     </form>
-                    <div className="signup_bottom">
+                    {/* <div className="signup_bottom">
                         <span className="small_light">By registering you agree with</span>
                         <Link to="#" className="small_light"
                         style={{color: "#0076F7", textDecoration: "none", marginLeft: "5px"}}>
                             Terms and condition
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
     )
 }
 
-export default Signup;
+export default Login;

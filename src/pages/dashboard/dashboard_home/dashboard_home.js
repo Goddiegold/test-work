@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useContext} from "react";
 import "./dashboard_home.css";
 import manSearching from "../../../assets/searching.png";
 import Sidebar from "../../../layout/sidebar/sidebar";
 import "../dashboard.css";
+import { UserContext } from "../../../context/UserContext";
 
 const DashboardHome = ({ full }) => {
     const val = ["morning","afternoon","evening","night"]
@@ -14,13 +15,14 @@ const DashboardHome = ({ full }) => {
         else return 3;
     }
     const greeting = val[getGreeting()];
+    const {user} = useContext(UserContext)
     return (
         <div className="dashboard_contents">
             <Sidebar full={full} />
             <div className={full ? "dash_home" : "dash_home_full"}>
                 <div className="dash_home_wrapper">
                     <div className="dash_home_content">
-                        <h1>Hi, Emmanuel 👋🏼</h1>
+                        <h1>Hi, {user.user?user.user.name:""} 👋🏼</h1>
                         <span className="big">
                             Good {greeting}, see how your research is doing
                         </span>

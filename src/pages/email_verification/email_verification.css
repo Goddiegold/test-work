@@ -67,6 +67,7 @@
 .email_main > span {
     font-size: 15px;
     font-weight: 550;
+    width: 100%;
     line-height: 1.5rem;
 }
 .email_main .email_button {
