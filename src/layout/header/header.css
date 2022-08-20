@@ -23,6 +23,15 @@ header {
     position: absolute;
     z-index: 1000;
 }
+.dropdown {
+    height: max-content;
+}
+.dropdown > * {
+    cursor: pointer;
+}
+.dropdown ul li:hover, .dropdown ul li:focus {
+    filter: opacity(0.5);
+}
 .notifications .notifications_content {
     width: 100%;
     height: 100%;

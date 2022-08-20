@@ -6,7 +6,7 @@ import settings from "../../assets/setting.svg";
 
 const Data = [
     {
-        text: "Dashboard", link: "#",
+        text: "Dashboard", link: "/dashboard",
         img: dashboard 
     },
     {
