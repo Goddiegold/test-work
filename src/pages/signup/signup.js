@@ -3,6 +3,7 @@ import Banner from "../../components/Banner/Banner";
 import { Link, useNavigate } from "react-router-dom";
 import "./signup.css";
 import {register} from "../../services/userService";
+import { toast } from "react-toastify";
 
 
 const Signup = () => {
@@ -28,6 +29,7 @@ const navigate = useNavigate()
         e.preventDefault()
         register(user).then(res=>{
             console.log(res)
+            toast.success("Account successfully created!")
      navigate("/verify-account",{state:{usrEmail:res.data.email}})
         }).catch(err=>{
             console.log(err)

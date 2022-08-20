@@ -35,7 +35,9 @@ function App() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/account_setup" element={<AccountSetup />} />
-        <Route path="/verify-account" element={<EmailVerify />} />
+        <Route path="/verify-account" element={<EmailVerify />}>
+          <Route path=":verificationCode" element={<EmailVerify />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

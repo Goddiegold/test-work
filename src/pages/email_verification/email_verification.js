@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./email_verification.css";
 import Button from "../../components/Button/Button";
 import image from "../../assets/Ellipse 4.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import image2 from "../../assets/Ellipse 5.png";
 import { verifyAccount } from "../../services/userService";
@@ -12,17 +12,26 @@ const EmailVerify = () => {
 const [code,setCode] = useState("")
 const {state} = useLocation()
 const navigate = useNavigate()
+const { verificationCode } = useParams();
     
 useEffect(()=>{
-    if(!state?.usrEmail) return navigate("/login")
-},[])
 
-function handleAccountVerification(){
-    if(!code) return toast.info("Enter the code send to you mail")
-    if(code){
-        verifyAccount(code).then(res=>{
+    if (verificationCode) {
+        setCode(verificationCode);
+        handleAccountVerification(verificationCode);
+        return
+    };
+
+    // if(!state?.usrEmail) return navigate("/login")
+},[verificationCode])
+
+function handleAccountVerification(codePassed){
+    if(!codePassed) return toast.info("Enter the code sent to your mail")
+    if(codePassed){
+        verifyAccount(codePassed).then(res=>{
             console.log(res)
             toast.success(res.data)
+            navigate("/login");
         }).catch(err=>{
             console.log(err)
             toast.error(err.response.data)
@@ -57,7 +66,7 @@ function handleAccountVerification(){
                         <input placeholder="Enter verification code" type="text" value={code} onChange={(e)=>setCode(e.target.value)}/>
                     </div>
                     <div className="email_button">
-                        <Button text="Verify" onClick={handleAccountVerification}/>
+                        <Button text="Verify" onClick={() => handleAccountVerification(code)}/>
                     </div>
                 </div>
                 <div className="email_base">
