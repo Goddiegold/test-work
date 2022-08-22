@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./header.css";
 import { Link, useNavigate } from "react-router-dom";
 import image from "../../assets/Ellipse 5.png";
 import { toast } from "react-toastify";
+import { LOGOUT_USER, UserContext } from "../../context/UserContext";
 
 const Header = ({ toggleSidebar, full }) => {
 
@@ -17,10 +18,14 @@ const Header = ({ toggleSidebar, full }) => {
     ]
     const [showNotifications, setShowNotifications] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
+    const {userTokenDetailsDispatch} = useContext(UserContext)
     const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.clear();
+        userTokenDetailsDispatch({
+            type: LOGOUT_USER,
+        })
         navigate("/signup");
         toast.success("Successfully logged out!")
     }

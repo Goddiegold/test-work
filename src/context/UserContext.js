@@ -7,6 +7,7 @@ export const UserContext  = createContext();
 export const USER_TOKEN = "USER_TOKEN";
 export const USER_PROFILE="USER_PROFILE"
 export const yaarnBoxMaxToken = "yaarnBoxMaxToken";
+export const LOGOUT_USER = "logout_user";
 
 function userReducer(state,action){
 switch(action.type){
@@ -15,6 +16,8 @@ switch(action.type){
     return decodeUserToken(action.payload);
     case USER_PROFILE:
     return action.payload;
+    case LOGOUT_USER:
+        return {};
 }
 }
 
