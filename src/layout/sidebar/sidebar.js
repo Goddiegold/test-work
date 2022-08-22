@@ -3,28 +3,24 @@ import "./sidebar.css";
 import { Link } from "react-router-dom";
 import Data from "./sidebarData";
 
-const Sidebar = ({ full }) => {
+const Sidebar = ({ full, openModal, closeModal }) => {
 
     const [id, setId] = useState(0);
     const [dropdown, setDropdown] = useState(false);
     // const [isMobile, setIsMobile] = useState(false);
-    const workspace = ["My Researches", "My Projects"]
-    // useEffect(() => {
-    //     // const size = window.innerWidth;
-    //     return () => {
-    //         window.addEventListener("resize", () => {
-    //           if (window.innerWidth <= 770) setIsMobile(true);
-    //           else setIsMobile(false);
-    //         });
-    //     };
-    // }, []);
+    const workspace = ["My Researches", "My Projects", "My Progress"];
+    const handleRoute = (val) => {
+        console.log(val);
+        if(val === "My Progress") openModal();
+        else return;
+    }
 
     return (
         <div className={full ? "sidebar_full" : "sidebar"}>
             <div className="sidebar_contents">
-                <div className="sidebar_workspace"
-                onClick={() => setDropdown(!dropdown)}>
-                    <span>
+                <div className="sidebar_workspace">
+                    <span 
+                    onClick={() => setDropdown(!dropdown)}>
                         {full ? "My Workspace" : ""}
                         {full && 
                             <svg width="20px" height="20px" viewBox="0 0 24 24" 
@@ -40,10 +36,10 @@ const Sidebar = ({ full }) => {
                         <div className="workspace_dropdown">
                             <div className="workspace_dropdown_content">
                                 {workspace.map((val, idx) => (
-                                    <Link to="#" className="workspace_dropdown_span" 
-                                    key={idx}>
+                                    <div className="workspace_dropdown_span" 
+                                    key={idx} onClick={() => handleRoute(val)}>
                                         {val}
-                                    </Link>
+                                    </div>
                                 ))}
                             </div>
                         </div>

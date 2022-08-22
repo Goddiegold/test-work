@@ -13,7 +13,6 @@ const Onboarding = () => {
 
     const handleClick = (e) => {
         if(ref1.current && ref2.current) {
-            console.log(ref1.current, ref2.current)
             if(!ref1.current.contains(e.target) && !ref2.current.contains(e.target)) {
                 setSelected(null);
             } 

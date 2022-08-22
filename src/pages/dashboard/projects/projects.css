@@ -20,7 +20,7 @@
     box-sizing: border-box;
     padding: 50px 0px;
     background-color: #DDE9F6;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     /* align-items: center; */
 }
 .projects_wrapper .projects_content {

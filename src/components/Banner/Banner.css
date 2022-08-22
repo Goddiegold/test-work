@@ -1,8 +1,8 @@
 .banner {
     background: #042E5C;
     width: 50%;
-    overflow-x: hidden;
-    height: auto;
+    overflow: hidden;
+    height: 100%;
     box-sizing: border-box;
     padding: 50px 0px;
 }
