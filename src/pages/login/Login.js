@@ -63,7 +63,7 @@ if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") retu
             <div className="signup_fields">
                 <div className="signup_fields_contents">
                     <div className="logo_brand">
-                        <span>yaarnbox</span>
+                        <span>Yaarnbox</span>
                     </div>
                     <h2>Login to your account</h2>
                     <span className="small_light"

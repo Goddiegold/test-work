@@ -43,12 +43,12 @@ const navigate = useNavigate()
             <div className="signup_fields">
                 <div className="signup_fields_contents">
                     <div className="logo_brand">
-                        <span>yaarnbox</span>
+                        <span>Yaarnbox</span>
                     </div>
                     <h2>Create an account</h2>
                     <span className="small_light"
                     style={{marginTop: "20px"}}>
-                        Some Info
+                        {/* Some Info */}
                     </span>
                     <form onSubmit={handleFormSubmit}>
                         <div className="input_field">

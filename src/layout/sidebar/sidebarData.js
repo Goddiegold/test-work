@@ -1,7 +1,7 @@
 import dashboard from "../../assets/dashboard.svg";
 import projects from "../../assets/projects.svg";
 import sync from "../../assets/sync.svg";
-import trash from "../../assets/trash.svg";
+import analytics from "../../assets/analytics.svg";
 import settings from "../../assets/setting.svg";
 
 const Data = [
@@ -18,8 +18,8 @@ const Data = [
         img: sync
     },
     {
-        text: "Trash", link: "#",
-        img: trash
+        text: "Analytics", link: "#",
+        img: analytics
     },
     {
         text: "Settings", link: "#",
