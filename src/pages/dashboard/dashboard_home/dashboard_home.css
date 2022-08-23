@@ -49,20 +49,64 @@
     padding: 50px 0px;
     display: flex;
     margin-top: 20px;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #B2D6FD;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
-.dash_main_contents img {
+.dash_main_contents .dash_home_nocontents,
+.dash_main_contents .dash_home_withcontents,
+.dash_main_contents .dash_home_charts {
+    width: 95%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+.dash_home_nocontents img {
     width: 250px;
     height: 250px;
 }
-.dash_main_contents span {
+.dash_home_nocontents span {
     font-size: 25px;
     font-weight: 550;
     line-height: 1.8rem;
+}
+.dash_home_withcontents .withcontents_top,
+.dash_home_withcontents .withcontents_main,
+.dash_home_withcontents .withcontents_base,
+.dash_home_charts .dash_home_charts_top,
+.dash_home_charts .dash_home_charts_main {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.withcontents_main {
+    list-style: none;
+    padding: 0;
+}
+.withcontents_main li {
+    width: 30%;
+    height: auto;
+}
+.withcontents_base {
+    height: 2px !important;
+    background: rgba(58, 55, 55, 0.37);
+}
+
+.dash_home_charts_main .charts_card {
+    width: 46%;
+    height: 300px;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 0 auto;
 }
 
 @media screen and (max-width: 770px) {
@@ -73,5 +117,21 @@
         width: 100%;
         height: 100%;
         display: block;
+    }
+    
+    .dash_home_withcontents .withcontents_main,
+    .dash_home_charts .dash_home_charts_main {
+        
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+    }
+    .withcontents_main li {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .dash_home_charts_main .charts_card {
+        width: 95%;
+        margin-top: 20px;
     }
 }

@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useContext, useEffect } from "react";
 import { getUserProfile } from "./services/userService";
 import { UserContext,yaarnBoxMaxToken,USER_PROFILE} from "./context/UserContext";
-
+import WorkspaceSetup from "./pages/workspace_setup/workspace_setup";
 
 function App() {
 // const {userDispatch,userTokenDetails} = useContext(UserContext)
@@ -38,6 +38,8 @@ function App() {
         <Route path="/verify-account" element={<EmailVerify />}>
           <Route path=":verificationCode" element={<EmailVerify />} />
         </Route>
+        <Route path="/email" element={<EmailVerify />} />
+        <Route path="/workspace_setup" element={<WorkspaceSetup />} />
       </Routes>
     </BrowserRouter>
   );

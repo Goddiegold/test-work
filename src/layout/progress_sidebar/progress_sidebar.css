@@ -1,9 +1,30 @@
-.projects .PS, 
-.projects_full .PS {
-    width: 40%;
+.PS_in, .PS_out {
+    width: 400px;
     height: 100%;
 }
-.PS {
+.PS_in {
+    animation: slideIn 1s ease-in-out;
+}
+.PS_out {
+    animation: slideOut 1s ease-in-out;
+}
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+    }
+    to {
+        transform: translateX(0px);
+    }
+}
+@keyframes slideOut {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(400px);
+    }
+}
+.PS_in, .PS_out {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
@@ -13,7 +34,8 @@
     position: relative;
     font-family: 'Fira Sans';
 }
-.PS .PS_wrapper {
+.PS_in .PS_wrapper,
+.PS_out .PS_wrapper {
     width: 80%;
     /* height: 100%; */
 }
@@ -89,3 +111,37 @@
     font-weight: 550;
     color: white;
 }
+@media screen and (max-width: 300px) {
+    .PS_in, .PS_out {
+        width: 300px;
+        height: 100%;
+    }
+    .PS_in {
+        margin-left: 300px;
+        animation: slideIn 1.5s ease-in-out;
+    }
+    .PS_out {
+        animation: slideOut 1.5s ease-in-out;
+    }
+    @keyframes slideIn {
+        from {
+            margin-left: 300px;
+        }
+        to {
+            margin-left: 0px;
+        }
+    }
+    @keyframes slideOut {
+        from {
+            margin-left: 0px;
+        }
+        to {
+            margin-left: 300px;
+        }
+    }
+}
+/* @media screen and (min-width: 1071px) {
+    .PS_in, .PS_out {
+        animation: none;
+    }
+} */

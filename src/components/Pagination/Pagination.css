@@ -1,0 +1,35 @@
+.Pagination, .pages {
+    width: auto;
+    height: auto;
+    display: flex;
+    box-sizing: border-box;
+}
+.Pagination {
+    padding: 10px;
+}
+.page, .left_scroll, .right_scroll {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px; */
+    /* width: auto;
+    height: auto; */
+    box-sizing: border-box;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+.left_scroll {
+    background: #D9D9D9;
+    color: white !important;
+}
+.page, .right_scroll { 
+    margin-left: 10px;
+}
+.left_scroll, .right_scroll {
+    color: #C4CDD5;
+    border: 1px solid #DFE3E8;
+}

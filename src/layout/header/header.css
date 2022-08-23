@@ -1,6 +1,8 @@
 header {
     width: 100%;
     position: relative;
+    overflow-x: hidden;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
 }
 .header {
     width: 100%;
@@ -126,15 +128,21 @@ header {
     margin-left: 20px;
     width: 15rem;
     height: auto;
-}
-.header_input input {
-    width: 100%;
-    height: auto;
     box-sizing: border-box;
     padding: 10px;
-    outline: none;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.header_input input {
+    width: calc(100% - 40px);
+    height: auto;
+    margin-left: 6px;
+    box-sizing: border-box;
+    padding: 0px;
+    outline: none;
+    border: none;
     background: none;
 }
 .notification {
