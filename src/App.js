@@ -45,7 +45,6 @@ function App() {
             </NewProjectContextProvider>
           </ProjectsContextProvider>
         } />
-        <Route path="/dashboard/projects/create/form.json" element={<>hi</>} />
         <Route path="/account_setup" element={<AccountSetup />} />
         <Route path="/verify-account" element={<EmailVerify />}>
           <Route path=":verificationCode" element={<EmailVerify />} />
