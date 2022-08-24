@@ -8,14 +8,16 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import data from "./data.js";
 import Toggle from "../../../../components/Toggle/Toggle";
+import { useProjectsContext } from "../../../../context/ProjectsContext";
 
 const ProjectsView = ({ openModal }) => {
 
     const [projectsdropdown, setProjectsdropdown] = useState(false);
+    const { projects } = useProjectsContext();
     const sliderRef = useRef(null);
     const breakDown = () => {
         let arr = [];
-        for(var i=0;i<data.length;i+=6) arr.push(data.slice(i, i+6))
+        for(var i=0;i<projects.length;i+=6) arr.push(projects.slice(i, i+6))
         // console.log(arr);
         return arr;
     }

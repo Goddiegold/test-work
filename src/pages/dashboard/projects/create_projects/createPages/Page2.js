@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import "../create_project.css";
 import letter from "../../../../../assets/letter.png";
+import { useProjectDataSourceContext } from "../../../../../context/ProjectDataSourceSelection";
 
 const CreatePage2 = () => {
 
     const [listSelect, setListSelect] = useState(null);
+    const { setSourceSelected } = useProjectDataSourceContext();
+
+    const handleClick = (itemSelected, item) => {
+        setListSelect(itemSelected);
+        setSourceSelected(item);
+    }
 
     return (
         <div className="report_content">
@@ -14,7 +21,7 @@ const CreatePage2 = () => {
             </span>
             <ul className="report_content_lists">
                 <li className="report_content_list" 
-                onClick={() => setListSelect(1)}
+                onClick={() => handleClick(1, "scratch")}
                 style={{border: `1px solid ${listSelect==1?"blue":"#AAAAAA"}`}}>
                     <div>
                         <svg width="63" height="63" viewBox="0 0 63 63" 
@@ -27,7 +34,7 @@ const CreatePage2 = () => {
                     </div>
                 </li>
                 <li className="report_content_list"
-                onClick={() => setListSelect(2)}
+                onClick={() => handleClick(2, "template")}
                 style={{border: `1px solid ${listSelect==2?"blue":"#AAAAAA"}`}}>
                     <div>
                         <img src={letter} />

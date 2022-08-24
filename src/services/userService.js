@@ -32,19 +32,23 @@ export async function getUserProfile(token,accountType){
 }
 
 export async function getAllProjects(token){
-    return await http.get(`/users/client/all-projects`, headers(token))
+    return await http.get(`/users/clients/all-projects`, headers(token))
 }
 
-export async function createNewProject(token){
-    return await http.post(`/users/client/new-project`, headers(token))
+export async function createNewProject(data, token){
+    return await http.post(`/users/clients/new-project`, data, headers(token))
 }
 
-export async function createNewTrivia(token, projectId){
-    return await http.post(`/users/client/project-trivia/${projectId}`, headers(token))
+export async function editProject(data, token, projectId) {
+    return await http.put(`/users/clients/edit-project/${projectId}`, data, headers(token))
 }
 
-export async function createNewPoll(token, projectId){
-    return await http.post(`/users/client/project-poll/${projectId}`, headers(token))
+export async function createNewTrivia(data, token, projectId){
+    return await http.post(`/users/clients/project-trivia/${projectId}`, data, headers(token))
+}
+
+export async function createNewPoll(data, token, projectId){
+    return await http.post(`/users/clients/project-poll/${projectId}`, data, headers(token))
 }
 
     export function decodeUserToken(token){

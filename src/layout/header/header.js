@@ -113,7 +113,7 @@ const Header = ({ toggleSidebar, full }) => {
                 </div>
             }
             {showDropdown && 
-                <div className="notifications dropdown">
+                <div className="notifications profile__Dropdown">
                     <div className="notifications_content">
                         <ul>
                             <li className="notification_list">

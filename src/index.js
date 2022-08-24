@@ -6,15 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import reportWebVitals from './reportWebVitals';
 import UserContextProvider from './context/UserContext';
 import { debugContextDevtool } from 'react-context-devtool';
-import { ProjectsContextProvider } from './context/ProjectsContext';
 
 const container =   ReactDOM.createRoot(document.getElementById("root"));
 
 container.render(
     <UserContextProvider>
-      <ProjectsContextProvider>
         <App/>
-      </ProjectsContextProvider>
     </UserContextProvider>
 );
 // root.render(

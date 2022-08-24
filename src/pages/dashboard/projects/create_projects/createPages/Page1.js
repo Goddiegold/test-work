@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../create_project.css";
 import "antd/dist/antd.css";
 import { DatePicker } from "antd";
@@ -10,6 +10,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Link } from "react-router-dom";
 import image1 from "../../../../../assets/Groupchat.png";
 import image2 from "../../../../../assets/Quiz.png";
+import { useNewProjectContext } from "../../../../../context/NewProjectContext";
 const { RangePicker } = DatePicker;
 
 const CreatePage1 = () => {
@@ -20,36 +21,56 @@ const CreatePage1 = () => {
     const [dates, setDates] = useState({});
     const refQual = useRef(null);
     const refQuan = useRef(null);
+    const { newProject, setNewProject  } = useNewProjectContext();
 
     const onEditorStateChange = (val) => {
-        console.log(convertToRaw(editorState.getCurrentContent()));
+        const rawContent = convertToRaw(editorState.getCurrentContent());
+        console.log(rawContent);
+        const stringContent = rawContent.blocks.map(content => content.text).join("\n");
+        console.log(stringContent);
+        handleStateChange("goal", stringContent);
         setEditorState(val)
     }
 
     const handleClick = (e) => {
         if(refQual.current && refQuan.current) {
-            if(!refQual.current.contains(e.target) && !refQuan.current.contains(e.target)) {
-                setSelected(null);
-            } 
+            // if(!refQual.current.contains(e.target) && !refQuan.current.contains(e.target)) {
+            //     setSelected(null);
+            // } 
         }
     }
+
+    const handleStateChange = (stateName, newValue) => {
+        if (!stateName) return;
+
+        setNewProject(prevValue => { return { ...prevValue, [stateName]: newValue } });
+    }
+
+    useEffect(() => {
+
+        if (Object.keys(dates || {}).length === 0) return;
+
+        handleStateChange("startDate", dates.start_date);
+        handleStateChange("endDate", dates.end_date);
+        
+    }, [dates])
 
     return (
         <div className="report_content" onClick={handleClick}>
             <div className="research">
                 <span className="big">Research Title</span>
-                <input placeholder="Title" />
+                <input placeholder="Title" name="title" value={newProject.title} onChange={(e) => handleStateChange("title", e.target.value)} />
             </div>
             <div className="research_type_select">
                 <span className="big">Select research type</span>
                 <div className="research_types">
                     <div className="research_type" 
-                    onClick={() => setSelected("qualitative")} ref={refQual}
+                    onClick={() => { setSelected("qualitative"); handleStateChange("researchType", "qualitative")}} ref={refQual}
                     style={{border: selected==="qualitative"?"1px solid blue":"1px solid #D9D9D9"}}>
                         <img src={image1} />
                         <div className="RT_texts">
                             <span className="med_thick">
-                                Qualtitative Research
+                                Qualitative Research
                             </span>
                             <span className="light_thin">
                                 Create focused groups and interview sessions
@@ -67,7 +88,7 @@ const CreatePage1 = () => {
                         }
                     </div>
                     <div className="research_type"
-                    onClick={() => setSelected("quantitative")} ref={refQuan}
+                    onClick={() => { setSelected("quantitative"); handleStateChange("researchType", "quantitative") }} ref={refQuan}
                     style={{border: selected==="quantitative"?"1px solid blue":"1px solid #D9D9D9"}}>
                         <img src={image2} />
                         <div className="RT_texts">

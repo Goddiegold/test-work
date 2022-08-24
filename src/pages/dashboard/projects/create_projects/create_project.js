@@ -9,12 +9,22 @@ import CreatePage3 from "./createPages/Page3";
 import CreateForm from "./createPages/Page4";
 import CreateInvite from "./createPages/Invite";
 import CreateSuccess from "./createPages/Success";
+import { useNewProjectContext } from "../../../../context/NewProjectContext";
+import { LoadingSpinner } from "../../../../components/LoadingSpinner/Spinner";
+import { createNewPoll, createNewProject } from "../../../../services/userService";
+import { yaarnBoxMaxToken } from "../../../../context/UserContext";
+import { toast } from "react-toastify";
+import { useProjectDataSourceContext } from "../../../../context/ProjectDataSourceSelection";
 
 
 const CreateProject = () => {
     
     const path = window.location.pathname;
     const navigate = useNavigate();
+    const [ requestLoading, setLoading ] = useState(false);
+    const { newProject, setNewProject } = useNewProjectContext();
+    const { sourceSelected, researchItem } = useProjectDataSourceContext();
+
     const getForwardLink = () => {
         if(path.includes("2")) return "/dashboard/projects/create/3";
         else if(path.includes("3")) return "/dashboard/projects/create/form";
@@ -34,12 +44,73 @@ const CreateProject = () => {
     }
     const handleBack = () => {
         const backPath = getBackwardLink();
+        if (requestLoading) return;
         navigate(backPath);
     }
     const handleButtonClick = () => {
         const forwardPath = getForwardLink();
-        navigate(forwardPath);
+        
+        setLoading(true);
+        
+        const token = localStorage.getItem(yaarnBoxMaxToken);
+        if (!token) return setLoading(false);
+
+        switch (forwardPath) {
+            case "/dashboard/projects/create/2":
+                if (newProject.researchType === "") {
+                    toast.info("Please select a research type");
+                    return setLoading(false);
+                }
+                if (newProject.researchType === "qualitative") {
+                    toast.info("Still currently in development");
+                    return setLoading(false);
+                }
+                if (newProject._id) return navigate(forwardPath);
+
+                // createNewProject(newProject, token).then(res => {
+                //     setNewProject(res.data);
+                //     toast.success("Project successfully created!");
+                    
+                //     navigate(forwardPath);
+                // }).catch(err => {
+                //     toast.error(err.response.data);
+                // })
+                setLoading(false);
+                return navigate(forwardPath);
+            case "/dashboard/projects/create/3":
+                if (!sourceSelected) {
+                    toast.info("Please select a data source.");
+                    return setLoading(false);
+                }
+                if (sourceSelected === "template") {
+                    toast.info("Still currently in development");
+                    return setLoading(false);
+                }
+                setLoading(false);
+                return navigate(forwardPath);
+
+            case "/dashboard/projects/create/form":
+                if (!researchItem) {
+                    toast.info("Please select a data source.");
+                    return setLoading(false);
+                }
+                if (researchItem === "Customer Survey") {
+                    toast.info("Still currently in development");
+                    return setLoading(false);
+                }
+                if (researchItem === "Yaarnbox Max Questionaire") {
+                    toast.info("Still currently in development");
+                    return setLoading(false);
+                }
+                setLoading(false);
+                return navigate(forwardPath);
+
+            default:
+                setLoading(false)
+                navigate(forwardPath);
+        }
     }
+
     return (
         <div className="create_projects">
             <div className="create_projects_wrapper">
@@ -62,7 +133,7 @@ const CreateProject = () => {
                     <div className="create_projects_base">
                         {!path.includes("success") ?
                             <div className="create_projects_base_content">
-                                <div className="create_projects_back">
+                                <div className={`create_projects_back ${requestLoading ? 'disabled' : '' }`}>
                                     <svg width="50" height="50" viewBox="0 0 66 66" fill="none" 
                                     xmlns="http://www.w3.org/2000/svg" 
                                     onClick={() => handleBack()}>
@@ -75,9 +146,11 @@ const CreateProject = () => {
                                     </svg>
                                 </div>
                                 <div className="create_projects_base_button">
+                                    
                                     <Button 
-                                    text={"Save & go next"} 
+                                    text={requestLoading ? <LoadingSpinner /> : "Save & go next"} 
                                     handleButtonClick={handleButtonClick}
+                                    disabled={requestLoading}
                                     />
                                 </div>
                             </div> :
@@ -85,8 +158,9 @@ const CreateProject = () => {
                                 <div className="create_projects_base_content">
                                     <div className="create_projects_base_button">
                                         <Button 
-                                        text={"Proceed to Overview"} 
+                                        text={requestLoading ? <LoadingSpinner /> : "Proceed to Overview"} 
                                         handleButtonClick={handleButtonClick}
+                                        disabled={requestLoading}
                                         />
                                     </div>
                                 </div>

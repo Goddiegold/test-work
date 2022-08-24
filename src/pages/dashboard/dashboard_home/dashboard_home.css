@@ -85,6 +85,9 @@
     justify-content: space-between;
     align-items: center;
 }
+.withcontents_top .light_thin {
+    text-decoration: none;
+}
 .withcontents_main {
     list-style: none;
     padding: 0;

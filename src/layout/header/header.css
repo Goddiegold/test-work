@@ -26,13 +26,13 @@ header {
     position: absolute;
     z-index: 1000;
 }
-.dropdown {
+.profile__Dropdown {
     height: max-content;
 }
-.dropdown > * {
+.profile__Dropdown > * {
     cursor: pointer;
 }
-.dropdown ul li:hover, .dropdown ul li:focus {
+.profile__Dropdown ul li:hover, .profile__Dropdown ul li:focus {
     filter: opacity(0.5);
 }
 .notifications .notifications_content {

@@ -3,8 +3,11 @@ import { ReactFormBuilder } from "react-form-builder2";
 import "react-form-builder2/dist/app.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../create_project.css";
+import { useProjectDataSourceContext } from "../../../../../context/ProjectDataSourceSelection";
 
 const CreateForm = () => {
+
+    const { sourceSelected, researchItem } = useProjectDataSourceContext();
 
     const items = [
         {
@@ -71,9 +74,18 @@ const CreateForm = () => {
     }
     return (
         <div className="report_content">
-            <span className="report_big_txt">Select template</span>
+            <span className="report_big_txt">{sourceSelected && sourceSelected === "scratch" ? "Create Form" : "Select template"}</span>
             <span className="report_small_txt">
-                Create an amazing form to collect data easily for surveys, quizes, polls and trivia
+                {
+                    sourceSelected && sourceSelected === "scratch" ? 
+                    researchItem && researchItem === "Yaarnbox Max poll" ?
+                    `Create an amazing form to collect data easily for your poll` : 
+                    researchItem && researchItem === "Yaarnbox Max Trivia" ?
+                    `Create an amazing form to collect data easily for your trivia` :
+                    `Create an amazing form to collect data easily for surveys, quizes, polls and trivia` : 
+                    "Create an amazing form to collect data easily for surveys, quizes, polls and trivia"
+                }
+                
             </span>
             <div className="form_builder">
                 <ReactFormBuilder

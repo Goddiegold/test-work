@@ -5,6 +5,7 @@ import "./styles.css";
 import {getAllProjects, login} from "../../services/userService";
 import {UserContext, USER_TOKEN} from "../../context/UserContext"
 import { toast } from "react-toastify";
+import { useProjectsContext } from "../../context/ProjectsContext";
 
 const Login = () => {
 
@@ -19,6 +20,7 @@ const {name,email,password} = user;
 const navigate = useNavigate()
 
 const {userTokenDetails,userTokenDetailsDispatch} = useContext(UserContext)
+const { setProjects } = useProjectsContext();
 
 useEffect(()=>{
 if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") return navigate("/dashboard")
@@ -49,9 +51,9 @@ if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") retu
 
             if(res.data.accountType==="client"){
                 getAllProjects(res.headers["auth-token"]).then(resp => {
-                    console.log(resp)
-                    // toast.success("Logged in successfuly!")
-                    // return navigate("/dashboard")  
+                    setProjects(resp.data);
+                    toast.success("Logged in successfuly!")
+                    return navigate("/dashboard")  
                 }).catch(err => {
                     console.log(err)
                 })

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Data from "./sidebarData";
 
 const Sidebar = ({ full, openModal, closeModal }) => {
 
     const [id, setId] = useState(0);
     const [dropdown, setDropdown] = useState(false);
+    const navigate = useNavigate();
     // const [isMobile, setIsMobile] = useState(false);
     const workspace = ["My Researches", "My Projects", "My Progress"];
     const handleRoute = (val) => {
         console.log(val);
         if(val === "My Progress") openModal();
+        if (val === "My Projects") navigate("/dashboard/projects")
         else return;
     }
 

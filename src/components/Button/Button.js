@@ -1,10 +1,10 @@
 import React from "react";
 import "./Button.css";
 
-const Button = ({ text, handleButtonClick }) => {
+const Button = ({ text, handleButtonClick, disabled }) => {
 
     return (
-        <div className="button_link" onClick={handleButtonClick}>{text}</div>
+        <div className={`button_link ${disabled ? 'disabled' : ''}`} onClick={handleButtonClick}>{text}</div>
     )
 }
 

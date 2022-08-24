@@ -1,5 +1,6 @@
 import axios from "axios";
 import {toast} from "react-toastify"
+import { yaarnBoxMaxToken } from "../context/UserContext";
 
 function log(err) {
   console.log(err);
@@ -23,7 +24,8 @@ axios.interceptors.response.use(null, (error) => {
 
 
 const instance = axios.create({
-    baseURL:"https://qu4s5quvaz.us-east-1.awsapprunner.com/api"
+    // baseURL:"https://qu4s5quvaz.us-east-1.awsapprunner.com/api"
+    baseURL: "http://localhost:6777/api",
 })
 
 export default instance;

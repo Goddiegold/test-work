@@ -10,6 +10,9 @@ import { useContext, useEffect } from "react";
 import { getUserProfile } from "./services/userService";
 import { UserContext,yaarnBoxMaxToken,USER_PROFILE} from "./context/UserContext";
 import WorkspaceSetup from "./pages/workspace_setup/workspace_setup";
+import { ProjectDataSourceContextProvider } from "./context/ProjectDataSourceSelection";
+import { ProjectsContextProvider } from "./context/ProjectsContext";
+import { NewProjectContextProvider } from "./context/NewProjectContext";
 
 function App() {
 // const {userDispatch,userTokenDetails} = useContext(UserContext)
@@ -33,7 +36,16 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/dashboard/*" element={ 
+          <ProjectsContextProvider>
+            <NewProjectContextProvider>
+              <ProjectDataSourceContextProvider>
+                <Dashboard />
+              </ProjectDataSourceContextProvider>
+            </NewProjectContextProvider>
+          </ProjectsContextProvider>
+        } />
+        <Route path="/dashboard/projects/create/form.json" element={<>hi</>} />
         <Route path="/account_setup" element={<AccountSetup />} />
         <Route path="/verify-account" element={<EmailVerify />}>
           <Route path=":verificationCode" element={<EmailVerify />} />
