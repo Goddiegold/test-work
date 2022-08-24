@@ -3,9 +3,9 @@ import "../create_project.css";
 import "antd/dist/antd.css";
 import { DatePicker } from "antd";
 import moment from "moment";
-// import { Editor } from "react-draft-wysiwyg";
-// import { EditorState } from "draft-js";
-// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 // import { Editor } from "@tinymce/tinymce-react";
 import { Link } from "react-router-dom";
 import image1 from "../../../../../assets/Groupchat.png";
@@ -15,17 +15,17 @@ const { RangePicker } = DatePicker;
 const CreatePage1 = () => {
 
     const [selected, setSelected] = useState(null);
-    // const [editorState, setEditorState] = useState(EditorState.createEmpty());
-    const editorRef = useRef(null);
+    const [editorState, setEditorState] = useState(EditorState.createEmpty());
+    // const editorRef = useRef(null);
     const [dates, setDates] = useState({});
     const refQual = useRef(null);
     const refQuan = useRef(null);
 
-    const submit = () => {
-        if (editorRef.current) {
-            console.log(editorRef.current.getContent());
-        }
+    const onEditorStateChange = (val) => {
+        console.log(convertToRaw(editorState.getCurrentContent()));
+        setEditorState(val)
     }
+
     const handleClick = (e) => {
         if(refQual.current && refQuan.current) {
             if(!refQual.current.contains(e.target) && !refQuan.current.contains(e.target)) {
@@ -35,7 +35,7 @@ const CreatePage1 = () => {
     }
 
     return (
-        <div className="report_content">
+        <div className="report_content" onClick={handleClick}>
             <div className="research">
                 <span className="big">Research Title</span>
                 <input placeholder="Title" />
@@ -93,14 +93,15 @@ const CreatePage1 = () => {
             </div>
             <div className="research_goals">
                 <span className="big">Research Goals</span>
-                {/* <div className="rich_text_editor_div"> */}
-                    {/* <Editor 
+                <div className="rich_text_editor_div"> 
+                    <Editor
                     editorState={editorState}
                     toolBarClassName="toolbarClassName"
                     wrapperClassName="wrapperClassName"
                     editorClassName="editorClassName"
                     onEditorStateChange={onEditorStateChange}
-                     */}
+                    />
+                </div>
                     {/* <Editor
                         onInit={(evt, editor) => editorRef.current = editor}
                         initialValue="<p>This is the initial content of the editor.</p>"
@@ -120,7 +121,7 @@ const CreatePage1 = () => {
                         }}
                     />
                 </div> */}
-                <textarea placeholder="Goals Description" />
+                {/* <textarea placeholder="Goals Description" /> */}
             </div>
             <div className="date">
                 <span className="big">Date</span>
