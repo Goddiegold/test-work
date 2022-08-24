@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Banner from "../../components/Banner/Banner";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
-import {login} from "../../services/userService";
+import {getAllProjects, login} from "../../services/userService";
 import {UserContext, USER_TOKEN} from "../../context/UserContext"
 import { toast } from "react-toastify";
 
@@ -48,8 +48,13 @@ if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") retu
             if(res.data.accountType==="participant") return toast.success("Participant experience in still in development!",{position:"top-center"})
 
             if(res.data.accountType==="client"){
-                toast.success("Logged in successfuly!")
-                return navigate("/dashboard")
+                getAllProjects(res.headers["auth-token"]).then(resp => {
+                    console.log(resp)
+                    // toast.success("Logged in successfuly!")
+                    // return navigate("/dashboard")  
+                }).catch(err => {
+                    console.log(err)
+                })
             }
         }).catch(err=>{
             console.log(err)
