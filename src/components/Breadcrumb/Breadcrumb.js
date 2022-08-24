@@ -1,12 +1,18 @@
 import React from "react";
 import "./Breadcrumb.css";
+import { useNavigate } from "react-router-dom";
 
 const Breadcrumb = ({ clicked }) => {
 
-    // const clicked = "new";
+    const navigate = useNavigate();
+    const handleBreadcrumbRoute = (val) => {
+        if(val == "home") navigate("/dashboard/");
+        else if(val == "projects") navigate("/dashboard/projects/");
+        else navigate("/dashboard/projects/create/")
+    }
 
     return (
-        <div className="breadcrumb">
+        <div className="breadCrumb">
             <div className="breadcrumb_content">
                 <div className="breadcrumb_home">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" 
@@ -19,6 +25,7 @@ const Breadcrumb = ({ clicked }) => {
                         stroke={clicked=="home"?"#2F80ED":"#667085"} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="breadcrumb_txt" 
+                    onClick={() => handleBreadcrumbRoute("home")}
                     style={{color: clicked=="home"?"#2F80ED":"#667085"}}>
                         Home
                     </span>
@@ -34,6 +41,7 @@ const Breadcrumb = ({ clicked }) => {
                         stroke={clicked=="projects"?"#2F80ED":"#AAAAAA"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="breadcrumb_txt" 
+                    onClick={() => handleBreadcrumbRoute("projects")}
                     style={{color: clicked=="projects"?"#2F80ED":"#667085"}}>
                         Projects
                     </span>
@@ -42,7 +50,7 @@ const Breadcrumb = ({ clicked }) => {
                         {">"}
                     </span>
                 </div>
-                {clicked==="new" &&
+                {/* {clicked==="new" && */}
                     <div className="breadcrumb_new">
                         <svg width="14" height="14" viewBox="0 0 24 24" 
                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,15 +62,16 @@ const Breadcrumb = ({ clicked }) => {
                         </svg>
 
                         <span className="breadcrumb_txt" 
+                        onClick={() => handleBreadcrumbRoute("new")}
                         style={{color: clicked=="new"?"#2F80ED":"#667085"}}>
-                            new
+                            New
                         </span>
                         <span className="breadcrumb_txt" 
                         style={{color: clicked=="new"?"#2F80ED":"#667085"}}>
                             {">"}
                         </span>
                     </div>
-                }
+                {/* } */}
             </div>
         </div>
     )

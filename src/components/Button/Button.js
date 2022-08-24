@@ -1,14 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "./Button.css";
 
-const Button = ({ text, link }) => {
-
-    const navigate = useNavigate();
-
-    const handleButtonClick = () => {
-        if(link) navigate(link);
-    }
+const Button = ({ text, handleButtonClick }) => {
 
     return (
         <div className="button_link" onClick={handleButtonClick}>{text}</div>

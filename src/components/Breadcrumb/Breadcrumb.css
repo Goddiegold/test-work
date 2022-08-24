@@ -1,14 +1,15 @@
 .breadcrumb_content, .breadcrumb_home,
 .breadcrumb_projects, .breadcrumb_new {
-    width: auto;
+    width: max-content;
     height: auto;
     display: flex;
     align-items: center;
     box-sizing: border-box;
     padding: 10px 10px 10px 5px;
 }
-.breadcrumb {
-    width: auto;
+.breadCrumb {
+    width: max-content;
+    background: none;
     height: auto;
     display: flex;
     align-items: center;
@@ -28,7 +29,7 @@
 .home_svg {
     margin-top: -3px;
 }
-.breadcrumb span {
+.breadCrumb span {
     font-size: 14px;
     margin-left: 10px;
 }

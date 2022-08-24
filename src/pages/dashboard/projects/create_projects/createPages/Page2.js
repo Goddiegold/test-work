@@ -8,7 +8,7 @@ const CreatePage2 = () => {
 
     return (
         <div className="report_content">
-            <span className="report_big_txt">Create a data sourrce</span>
+            <span className="report_big_txt">Create a data source</span>
             <span className="report_small_txt">
                 Create an amazing form to collect data easily for surveys, quizes, polls and trivia
             </span>

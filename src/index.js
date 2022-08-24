@@ -17,6 +17,11 @@ container.render(
       </ProjectsContextProvider>
     </UserContextProvider>
 );
+// root.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>
+// );
 
 // Attach root container
 debugContextDevtool(container, {debugContext:true,debugReducer:true});

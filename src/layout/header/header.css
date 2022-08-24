@@ -1,7 +1,8 @@
 header {
     width: 100%;
     position: relative;
-    overflow-x: hidden;
+    z-index: 1;
+    /* overflow-x: hidden; */
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
 }
 .header {
@@ -126,7 +127,7 @@ header {
 }
 .header_input {
     margin-left: 20px;
-    width: 15rem;
+    width: 16rem;
     height: auto;
     box-sizing: border-box;
     padding: 10px;
@@ -136,7 +137,7 @@ header {
     align-items: center;
 }
 .header_input input {
-    width: calc(100% - 40px);
+    width: calc(100% - 50px);
     height: auto;
     margin-left: 6px;
     box-sizing: border-box;
