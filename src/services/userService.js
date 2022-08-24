@@ -31,6 +31,22 @@ export async function getUserProfile(token,accountType){
     return await http.get(`/users/${userType}/profile`,headers(token))
 }
 
+export async function getAllProjects(token){
+    return await http.get(`/users/client/all-projects`, headers(token))
+}
+
+export async function createNewProject(token){
+    return await http.post(`/users/client/new-project`, headers(token))
+}
+
+export async function createNewTrivia(token, projectId){
+    return await http.post(`/users/client/project-trivia/${projectId}`, headers(token))
+}
+
+export async function createNewPoll(token, projectId){
+    return await http.post(`/users/client/project-poll/${projectId}`, headers(token))
+}
+
     export function decodeUserToken(token){
         try{
             if(token) return {...jwtDecode(token),token}
