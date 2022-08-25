@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../create_project.css";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { DatePicker } from "antd";
 import moment from "moment";
 import { Editor } from "react-draft-wysiwyg";

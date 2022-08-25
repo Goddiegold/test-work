@@ -504,6 +504,9 @@
     bottom: 0px !important;
     margin-top: 20px !important;
 }
+.form-place-holder {
+    height: 750px !important;
+}
 @media screen and (min-width: 1000px) {
     .form_builder > div > div > div {
         display: flex;
