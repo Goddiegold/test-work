@@ -2,12 +2,12 @@ import React from "react";
 import "./progress_sidebar.css";
 import { Link } from "react-router-dom";
 
-const ProgressSidebar = ({ closeModal, slideIn }) => {
+const ProgressSidebar = ({ viewProgress }) => {
     
     const Progress = [1];
 
     return (
-        <div className={slideIn ? "PS_in" : "PS_out"}>
+        <div className={viewProgress ? "PS_in" : "PS_out"}>
             <div className="PS_wrapper">
                 <div className="PS_content">
                     <h1>Quick & Easy Setup</h1>

@@ -10,9 +10,7 @@ import { useContext, useEffect } from "react";
 import { getUserProfile } from "./services/userService";
 import { UserContext,yaarnBoxMaxToken,USER_PROFILE} from "./context/UserContext";
 import WorkspaceSetup from "./pages/workspace_setup/workspace_setup";
-import { ProjectDataSourceContextProvider } from "./context/ProjectDataSourceSelection";
 import { ProjectsContextProvider } from "./context/ProjectsContext";
-import { NewProjectContextProvider } from "./context/NewProjectContext";
 
 function App() {
 // const {userDispatch,userTokenDetails} = useContext(UserContext)
@@ -38,11 +36,7 @@ function App() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/dashboard/*" element={ 
           <ProjectsContextProvider>
-            <NewProjectContextProvider>
-              <ProjectDataSourceContextProvider>
-                <Dashboard />
-              </ProjectDataSourceContextProvider>
-            </NewProjectContextProvider>
+            <Dashboard />
           </ProjectsContextProvider>
         } />
         <Route path="/account_setup" element={<AccountSetup />} />

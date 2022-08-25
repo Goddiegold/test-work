@@ -3,14 +3,14 @@
     height: 100%;
 }
 .PS_in {
-    animation: slideIn 1s ease-in-out;
+    animation: slideIn .5s ease-in-out;
 }
 .PS_out {
-    animation: slideOut 1s ease-in-out;
+    animation: slideOut .5s ease-in-out;
 }
 @keyframes slideIn {
     from {
-        transform: translateX(400px);
+        transform: translateX(100vw);
     }
     to {
         transform: translateX(0px);
@@ -21,7 +21,7 @@
         transform: translateX(0px);
     }
     to {
-        transform: translateX(400px);
+        transform: translateX(100vw);
     }
 }
 .PS_in, .PS_out {
@@ -111,21 +111,21 @@
     font-weight: 550;
     color: white;
 }
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 770px) {
     .PS_in, .PS_out {
-        width: 300px;
+        width: calc(100% - 60px);
+        margin-left: 60px;
         height: 100%;
     }
     .PS_in {
-        margin-left: 300px;
-        animation: slideIn 1.5s ease-in-out;
+        animation: slideIn .5s ease-in-out;
     }
     .PS_out {
-        animation: slideOut 1.5s ease-in-out;
+        animation: slideOut .5s ease-in-out;
     }
     @keyframes slideIn {
         from {
-            margin-left: 300px;
+            margin-left: 100vw;
         }
         to {
             margin-left: 0px;
@@ -136,7 +136,7 @@
             margin-left: 0px;
         }
         to {
-            margin-left: 300px;
+            margin-left: 100vw;
         }
     }
 }

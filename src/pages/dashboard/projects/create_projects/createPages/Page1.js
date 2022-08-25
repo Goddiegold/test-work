@@ -1,71 +1,75 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../create_project.css";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { DatePicker } from "antd";
 import moment from "moment";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-// import { Editor } from "@tinymce/tinymce-react";
+import Select from "react-select";
 import { Link } from "react-router-dom";
 import image1 from "../../../../../assets/Groupchat.png";
 import image2 from "../../../../../assets/Quiz.png";
-import { useNewProjectContext } from "../../../../../context/NewProjectContext";
 const { RangePicker } = DatePicker;
 
-const CreatePage1 = () => {
+const CreatePage1 = ({ updateCreateData, updateNextRoute }) => {
 
     const [selected, setSelected] = useState(null);
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
-    // const editorRef = useRef(null);
-    const [dates, setDates] = useState({});
-    const refQual = useRef(null);
-    const refQuan = useRef(null);
-    const { newProject, setNewProject  } = useNewProjectContext();
-
-    const onEditorStateChange = (val) => {
-        const rawContent = convertToRaw(editorState.getCurrentContent());
-        console.log(rawContent);
-        const stringContent = rawContent.blocks.map(content => content.text).join("\n");
-        console.log(stringContent);
-        handleStateChange("goal", stringContent);
-        setEditorState(val)
-    }
-
-    const handleClick = (e) => {
-        if(refQual.current && refQuan.current) {
-            // if(!refQual.current.contains(e.target) && !refQuan.current.contains(e.target)) {
-            //     setSelected(null);
-            // } 
-        }
-    }
-
-    const handleStateChange = (stateName, newValue) => {
-        if (!stateName) return;
-
-        setNewProject(prevValue => { return { ...prevValue, [stateName]: newValue } });
-    }
-
     useEffect(() => {
+        updateNextRoute("/dashboard/projects/create/2");
+    }, []);
+    const durations = [
+        {value: "30 mins", label: "30 mins"},
+        {value: "45mins", label: "45 mins"},
+        {value: "1hr", label: "1hr"},
+        {value: "3hrs", label: "3hrs"},
+        {value: "4hrs", label: "4hrs"}
+    ]
 
-        if (Object.keys(dates || {}).length === 0) return;
+    //rich-text in html format
+    const onEditorStateChange = (val) => {
+        console.log(convertToRaw(editorState.getCurrentContent()));
+        const goal = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+        console.log(goal);
+        setEditorState(val);
+        updateCreateData("goal", goal);
+    }
+    const customStyles = {
+        control: (styles) => ({
+            ...styles,
+            paddingTop: 3,
+            paddingRight: 0,
+            paddingLeft: 3,
+            paddingBottom: 3,
+            borderRadius: 5,
+            
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            padding: 10
+        })
+    }
 
-        handleStateChange("startDate", dates.start_date);
-        handleStateChange("endDate", dates.end_date);
-        
-    }, [dates])
+    const handleSelection = (val) => {
+        setSelected(val);
+        updateCreateData("researchType", val);
+    }
 
     return (
-        <div className="report_content" onClick={handleClick}>
+        <div className="report_content">
             <div className="research">
                 <span className="big">Research Title</span>
-                <input placeholder="Title" name="title" value={newProject.title} onChange={(e) => handleStateChange("title", e.target.value)} />
+                <input placeholder="Title"
+                onChange={(e) => updateCreateData("title", e.target.value)} 
+                />
             </div>
             <div className="research_type_select">
                 <span className="big">Select research type</span>
                 <div className="research_types">
-                    <div className="research_type" 
-                    onClick={() => { setSelected("qualitative"); handleStateChange("researchType", "qualitative")}} ref={refQual}
+                    <div className="research_type"
+                    onClick={() => handleSelection("qualitative")}
                     style={{border: selected==="qualitative"?"1px solid blue":"1px solid #D9D9D9"}}>
                         <img src={image1} />
                         <div className="RT_texts">
@@ -88,7 +92,7 @@ const CreatePage1 = () => {
                         }
                     </div>
                     <div className="research_type"
-                    onClick={() => { setSelected("quantitative"); handleStateChange("researchType", "quantitative") }} ref={refQuan}
+                    onClick={() => handleSelection("quantitative")}
                     style={{border: selected==="quantitative"?"1px solid blue":"1px solid #D9D9D9"}}>
                         <img src={image2} />
                         <div className="RT_texts">
@@ -123,40 +127,47 @@ const CreatePage1 = () => {
                     onEditorStateChange={onEditorStateChange}
                     />
                 </div>
-                    {/* <Editor
-                        onInit={(evt, editor) => editorRef.current = editor}
-                        initialValue="<p>This is the initial content of the editor.</p>"
-                        init={{
-                        height: 500,
-                        menubar: false,
-                        plugins: [
-                            'advlist autolink lists link image charmap print preview anchor',
-                            'searchreplace visualblocks code fullscreen',
-                            'insertdatetime media table paste code help wordcount'
-                        ],
-                        toolbar: 'undo redo | formatselect | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                        }}
-                    />
-                </div> */}
                 {/* <textarea placeholder="Goals Description" /> */}
             </div>
             <div className="date">
-                <span className="big">Date</span>
+                {selected==="quantitative" &&<span className="big">Date</span>}
                 <div className="date_picker">
-                    <RangePicker className="range_picker"
-                    onChange={(values) => {
-                        const value1 = moment(values[0]).format("DD-MM-YYYY")
-                        const value2 = moment(values[1]).format("DD-MM-YYYY")
-                        setDates({
-                            start_date: value1,
-                            end_date: value2
-                        })
-                    }}
-                    />
+                    {selected==="quantitative" ?
+                        <RangePicker className="range_picker"
+                        onChange={(values) => {
+                            const value1 = moment(values[0]).format("DD-MM-YYYY")
+                            const value2 = moment(values[1]).format("DD-MM-YYYY")
+                            const dates = {
+                                start_date: value1,
+                                end_date: value2
+                            }
+                            updateCreateData("date", dates);
+                        }}
+                        /> :
+                        <div className="date_duration_div">
+                            <div className="date_picker_div">
+                                <div className="big">Date</div>
+                                <DatePicker className="date_plain_picker"
+                                onChange={(value) => {
+                                    const val = moment(value).format("DD-MM-YYYY");
+                                    updateCreateData("date", val);
+                                }}
+                                />
+                            </div>
+                            <div className="duration_picker">
+                                <div className="big">Duration</div>
+                                <Select 
+                                className="select"
+                                width="100%"
+                                styles={customStyles}
+                                options={durations}
+                                isSearchable={true}
+                                onChange={(val) => updateCreateData("duration", val)}
+                                closeMenuOnSelect={true}
+                                />
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

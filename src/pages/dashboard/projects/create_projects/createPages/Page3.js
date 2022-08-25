@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import { useProjectDataSourceContext } from "../../../../../context/ProjectDataSourceSelection";
+import React, { useEffect, useState } from "react";
 import "../create_project.css";
+import items from "./formtemplateData";
 
-const CreatePage3 = () => {
+const CreatePage3 = ({ updateCreateData, updateNextRoute }) => {
 
     const [listSelect, setListSelect] = useState(null);
-    const { sourceSelected, setResearchItem } = useProjectDataSourceContext();
+    const routeIdx = [
+        "customer-survey-form","yaarnbox-max-poll-form",
+        "yaarnbox-max-questionaire-form","yaarnbox-max-trivia-form"
+    ]
+    useEffect(() => {
+        updateNextRoute(`/dashboard/projects/create/${routeIdx[0]}`);
+    }, []);
+
+    const handleTemplateSelect = (val) => {
+        setListSelect(val);
+        updateCreateData("template", items);
+        updateNextRoute(`/dashboard/projects/create/${routeIdx[val]}`);
+    }
 
     const Res = [
         "Customer Survey", "Yaarnbox Max poll",
@@ -14,12 +26,12 @@ const CreatePage3 = () => {
 
     const handleClick = (itemIndex, item) => {
         setListSelect(itemIndex);
-        setResearchItem(item);
+        console.log(item)
     }
 
     return (
         <div className="report_content">
-            <span className="report_big_txt">{sourceSelected && sourceSelected === "scratch" ? "Create from scratch": "Select template"}</span>
+            <span className="report_big_txt">Select template</span>
             <span className="report_small_txt">
                 Create an amazing form to collect data easily for surveys, quizes, polls and trivia
             </span>

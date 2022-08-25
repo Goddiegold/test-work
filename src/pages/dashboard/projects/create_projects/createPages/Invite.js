@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../../../components/Button/Button";
 import "../create_project.css";
 
-const CreateInvite = () => {
+const CreateInvite = ({ createData }) => {
 
     const navigate = useNavigate();
     const participants = [
@@ -30,7 +30,13 @@ const CreateInvite = () => {
     const dropdownRef = useRef();
     const urlProviders = [".com",".net",".ng"]
     const handleButtonClick = () => {
-        navigate("/dashboard/projects/create/completed");
+        const fullData = {
+            ...createData,
+            ["invites"]: listText
+        }
+        console.log(fullData);
+        //send fullData to backend and navigate to success page
+        navigate("/dashboard/projects/create/success");
     }
     const participantsSearch = (val) => {
         if(val == "") return null;

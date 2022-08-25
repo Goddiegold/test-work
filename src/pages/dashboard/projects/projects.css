@@ -1,8 +1,9 @@
 .dashboard_contents .projects, 
 .dashboard_contents .projects_full {
     height: 100%;
-    /* background: red; */
+    background-color: #DDE9F6;
     transition: width 1s ease-in-out;
+    overflow-x: hidden;
     display: flex;
 }
 .projects {  
@@ -11,9 +12,37 @@
 .projects_full {
     width: calc(100% - 100px);
 }
+.projects .progress_sidebar_div,
+.projects_full .progress_sidebar_div {
+    width: auto;
+    max-width: 400px;
+    height: 100%;
+    display: flex;
+}
+.PSD_toggler, .PSD_toggler_full {
+    position: absolute;
+    z-index: 23;
+    top: 110px;
+    width: max-content;
+    height: auto;
+    cursor: pointer;
+    background-color: #0076F7;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: right .4s ease-in-out;
+}
+.PSD_toggler {
+    right: 30px;
+}
+.PSD_toggler_full {
+    right: 430px;
+}
 .projects .projects_wrapper, 
 .projects_full .projects_wrapper {
-    width: 60%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -23,7 +52,16 @@
     /* overflow-y: scroll; */
     /* align-items: center; */
 }
-.projects_wrapper .projects_content {
+.projects .projects_wrapper, 
+.projects_full .projects_wrapper {
+    width: calc(100% - 400px);
+}
+.projects .projects_wrapper_full, 
+.projects_full .projects_wrapper_full {
+    width: 60%;
+}
+.projects_wrapper .projects_content,
+.projects_wrapper_full .projects_content {
     width: 90%;
 }
 .projects_content { 
@@ -121,5 +159,13 @@
     }
     .dashboard .projects_full {
         width: 100%;
+    }
+    .projects .projects_wrapper, 
+    .projects_full .projects_wrapper {
+        width: 0px;
+        display: none;
+    }
+    .PSD_toggler_full {
+        right: calc(100vw - 50px)
     }
 }

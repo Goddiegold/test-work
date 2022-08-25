@@ -3,7 +3,7 @@ import "./sidebar.css";
 import { Link, useNavigate } from "react-router-dom";
 import Data from "./sidebarData";
 
-const Sidebar = ({ full, openModal, closeModal }) => {
+const Sidebar = ({ full }) => {
 
     const [id, setId] = useState(0);
     const [dropdown, setDropdown] = useState(false);
@@ -11,10 +11,8 @@ const Sidebar = ({ full, openModal, closeModal }) => {
     // const [isMobile, setIsMobile] = useState(false);
     const workspace = ["My Researches", "My Projects", "My Progress"];
     const handleRoute = (val) => {
-        console.log(val);
-        if(val === "My Progress") openModal();
         if (val === "My Projects") navigate("/dashboard/projects")
-        else return;
+        return;
     }
 
     return (
