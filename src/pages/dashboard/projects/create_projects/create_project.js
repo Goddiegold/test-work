@@ -55,7 +55,7 @@ const CreateProject = ({ viewProgress }) => {
         if (requestLoading) return;
         if (backPath === "/dashboard/projects/create/") {
             setCreateData({});
-            navigate("//dashboard/projects")
+            navigate("/dashboard/projects")
         }
         navigate(backPath);
     }
