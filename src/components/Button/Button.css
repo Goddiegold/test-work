@@ -14,3 +14,8 @@
 .button_link:hover {
     background: #68aef8;
 }
+@media screen and (max-width: 1024px) {
+    .button_link:hover {
+        background: #0076F7;
+    }
+}

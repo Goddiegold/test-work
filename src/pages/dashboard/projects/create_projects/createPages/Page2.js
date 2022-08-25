@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import "../create_project.css";
 import letter from "../../../../../assets/letter.png";
 
-const CreatePage2 = () => {
+const CreatePage2 = ({ updateCreateData, updateNextRoute }) => {
 
     const [listSelect, setListSelect] = useState(null);
+    const handleListSelect = (val) => {
+        setListSelect(val);
+        if(val===1) updateNextRoute("/dashboard/projects/create/form");
+        else updateNextRoute("/dashboard/projects/create/3");
+    }
 
     return (
         <div className="report_content">
@@ -14,7 +19,7 @@ const CreatePage2 = () => {
             </span>
             <ul className="report_content_lists">
                 <li className="report_content_list" 
-                onClick={() => setListSelect(1)}
+                onClick={() => handleListSelect(1)}
                 style={{border: `1px solid ${listSelect==1?"blue":"#AAAAAA"}`}}>
                     <div>
                         <svg width="63" height="63" viewBox="0 0 63 63" 
@@ -27,7 +32,7 @@ const CreatePage2 = () => {
                     </div>
                 </li>
                 <li className="report_content_list"
-                onClick={() => setListSelect(2)}
+                onClick={() => handleListSelect(2)}
                 style={{border: `1px solid ${listSelect==2?"blue":"#AAAAAA"}`}}>
                     <div>
                         <img src={letter} />

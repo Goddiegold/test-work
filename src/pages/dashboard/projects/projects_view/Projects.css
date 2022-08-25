@@ -1,14 +1,25 @@
 .projects .projects_view,
-.projects_full .projects_view {
+.projects_full .projects_view,
+.projects .projects_view_full,
+.projects_full .projects_view_full  {
     background: #DDE9F6;
     box-sizing: border-box;
-    width: 100%;
     height: 100%;
+    transition: width .5s ease-in-out;
+}
+.projects .projects_view,
+.projects_full .projects_view {
+    width: calc(100% - 400px);
+}
+.projects .projects_view_full,
+.projects_full .projects_view_full {
+    width: 100%;
 }
 .projects_view {
     overflow-y: scroll;
 }
-.projects_view .projects_view_wrapper {
+.projects_view .projects_view_wrapper,
+.projects_view_full .projects_view_wrapper {
     box-sizing: border-box;
     width: 100%;
     padding: 50px 0px;
@@ -58,7 +69,8 @@
     color: #8E8E8E;
     line-height: 1.5rem;
 }
-.projects_view .projects_views {
+.projects_view .projects_views,
+.projects_view_full .projects_views {
     height: auto !important;
     box-sizing: border-box;
     padding: 0px 0px 20px 0px;
@@ -117,7 +129,7 @@
     z-index: 10;
     top: 40px;
     left: 0px;
-    width: 8rem;
+    width: auto;
     cursor: pointer;
     height: auto;
     box-sizing: border-box;
@@ -125,6 +137,13 @@
     background: #FFFFFF;
     box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
+}
+.projects_dropdown span {
+    font-size: 15px;
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 .projects_views_content .projects_ul {
     height: auto !important;
@@ -201,5 +220,10 @@
     .Projects_lists .Projects_list {
         width: 99%;
         height: auto;
+    }
+    .projects .projects_view,
+    .projects_full .projects_view {
+        width: 0px;
+        display: none;
     }
 }

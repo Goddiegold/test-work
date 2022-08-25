@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../create_project.css";
+import items from "./formtemplateData";
 
-const CreatePage3 = () => {
+const CreatePage3 = ({ updateCreateData, updateNextRoute }) => {
 
     const [listSelect, setListSelect] = useState(null);
+    const routeIdx = [
+        "customer-survey-form","yaarnbox-max-poll-form",
+        "yaarnbox-max-questionaire-form","yaarnbox-max-trivia-form"
+    ]
+    useEffect(() => {
+        updateNextRoute(`/dashboard/projects/create/${routeIdx[0]}`);
+    }, []);
+
+    const handleTemplateSelect = (val) => {
+        setListSelect(val);
+        updateCreateData("template", items);
+        updateNextRoute(`/dashboard/projects/create/${routeIdx[val]}`);
+    }
 
     const Res = [
         "Customer Survey", "Yaarnbox Max poll",
@@ -18,7 +32,7 @@ const CreatePage3 = () => {
             <ul className="report_content_lists">
                 {Res.map((val, idx) => (
                     <li className="report_content_list" key={idx}
-                    onClick={() => setListSelect(idx)}
+                    onClick={() => handleTemplateSelect(idx)}
                     style={{border: `1px solid ${listSelect==idx?"blue":"#AAAAAA"}`}}>
                         <div>
                             <svg width="63" height="63" viewBox="0 0 63 63" 

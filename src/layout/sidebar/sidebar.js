@@ -3,16 +3,14 @@ import "./sidebar.css";
 import { Link } from "react-router-dom";
 import Data from "./sidebarData";
 
-const Sidebar = ({ full, openModal, closeModal }) => {
+const Sidebar = ({ full }) => {
 
     const [id, setId] = useState(0);
     const [dropdown, setDropdown] = useState(false);
     // const [isMobile, setIsMobile] = useState(false);
     const workspace = ["My Researches", "My Projects", "My Progress"];
     const handleRoute = (val) => {
-        console.log(val);
-        if(val === "My Progress") openModal();
-        else return;
+        return;
     }
 
     return (

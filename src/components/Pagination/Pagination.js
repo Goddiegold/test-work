@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Pagination.css";
 
 const CustomPagination = ({ len, handleScroll }) => {
@@ -8,6 +8,12 @@ const CustomPagination = ({ len, handleScroll }) => {
         start: 1,
         end: initial
     });
+    useEffect(() => {
+        setRange({
+            start: 1,
+            end: Math.min(len, 10)
+        })
+    }, [len]);
     const [selectedPage, setSelectedPage] = useState(1);
 
     const increment = () => {
