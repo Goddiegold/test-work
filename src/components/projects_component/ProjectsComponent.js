@@ -8,7 +8,7 @@ const ProjectsComponent = ({ data }) => {
     return (
         <div className="PCs_container">
             <div className="PCs_content">
-                <span className="PCs_big">{data.title.length > 18 ? data.title.slice(0, 18) + "..." : data.title}</span>
+                <span className="PCs_big">{data.title}</span>
                 <span className="PCs_small">{data.goal}</span>
                 <div className="PCs_button">View</div>
                 <div className="PCs_imgs">

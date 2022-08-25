@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import Banner from "../../components/Banner/Banner";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
-import {getAllProjects, login} from "../../services/userService";
-import {UserContext, USER_TOKEN} from "../../context/UserContext"
+import {login} from "../../services/userService";
+import {UserContext, USER_TOKEN, yaarnBoxMaxToken} from "../../context/UserContext"
 import { toast } from "react-toastify";
-import { useProjectsContext } from "../../context/ProjectsContext";
 
 const Login = () => {
 
@@ -20,7 +19,6 @@ const {name,email,password} = user;
 const navigate = useNavigate()
 
 const {userTokenDetails,userTokenDetailsDispatch} = useContext(UserContext)
-const { setProjects } = useProjectsContext();
 
 useEffect(()=>{
 if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") return navigate("/dashboard")
@@ -35,6 +33,7 @@ if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") retu
         e.preventDefault()
         login(user).then(res=>{
             console.log(res)
+
             userTokenDetailsDispatch({
                 type:USER_TOKEN,
                 payload:res.headers["auth-token"]
@@ -50,13 +49,8 @@ if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") retu
             if(res.data.accountType==="participant") return toast.success("Participant experience in still in development!",{position:"top-center"})
 
             if(res.data.accountType==="client"){
-                getAllProjects(res.headers["auth-token"]).then(resp => {
-                    setProjects(resp.data);
-                    toast.success("Logged in successfuly!")
-                    return navigate("/dashboard")  
-                }).catch(err => {
-                    console.log(err)
-                })
+                toast.success("Logged in successfuly!")
+                return navigate("/dashboard")
             }
         }).catch(err=>{
             console.log(err)
