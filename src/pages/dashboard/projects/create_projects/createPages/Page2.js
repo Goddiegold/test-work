@@ -32,6 +32,11 @@ const CreatePage2 = ({ updateCreateData, updateNextRoute }) => {
 
         function animateBorderChange() {
             if (maxCount < 1) {
+                if (item === "polls") {
+                    updateNextRoute("/dashboard/projects/create/scratchPollForm");
+                    navigate("/dashboard/projects/create/scratchPollForm");
+                    return
+                }
                 updateNextRoute("/dashboard/projects/create/form");
                 navigate("/dashboard/projects/create/form");
                 return;
@@ -86,7 +91,7 @@ const CreatePage2 = ({ updateCreateData, updateNextRoute }) => {
                 
                     <ul>
                         <li className="disabled">Customer Surveys</li>
-                        <li className="disabled">Yaarn Box Max Polls</li>
+                        <li onClick={(elem) => handleScratchOptionsSelect(elem, 2, "polls")} style={{ borderColor: scratchListSelect === 2 ? "blue" : "#D9D9D9"}}>Yaarn Box Max Polls</li>
                         <li className="disabled">Yaarn Box Max Questionnaire</li>
                         <li onClick={(elem) => handleScratchOptionsSelect(elem, 4, "trivia")} style={{ borderColor: scratchListSelect === 4 ? "blue" : "#D9D9D9"}}>Yaarn Box Max Trivia</li>
                     </ul>

@@ -15,6 +15,7 @@ import { yaarnBoxMaxToken } from "../../../../context/UserContext";
 import { toast } from "react-toastify";
 import FormTemplate from "./createPages/formTemplate";
 import { useProjectsContext } from "../../../../context/ProjectsContext";
+import ScratchPollForm from "./createPages/pollForm";
 
 
 const CreateProject = ({ viewProgress }) => {
@@ -118,20 +119,58 @@ const CreateProject = ({ viewProgress }) => {
                     return navigate(-1);
                 }
 
-                if (createData.projectType === "trivia") {
+                if (createData.projectType === "trivia" || createData.projectType === "polls") {
                     if (!createData.project_id) return navigate("/dashboard/projects/create");
 
+                    if (!createData.formData) {
+                        setLoading(false);
+                        return toast.info("Please create a form before proceeding");
+                    }
+
                     const formData = createData.formData;
-                    const title = formData.find(formElem => formElem.element === "Header").content;
-                    const formQuestions = formData.filter(formElem => formElem.element === "Paragraph").map(elem => elem.content);
+                    const formParagraphs = formData.filter(formElem => formElem.element === "Paragraph").map(elem => elem.content);
                     const formOptions = formData.filter(formElem => formElem.element === "RadioButtons").map(elem => elem.options).flat();
                     const options = formOptions.map(option => option.text);
                     
+                    if (createData.projectType === "polls") {
+
+                        if (formParagraphs.length === 0) {
+                            setLoading(false);
+                            return toast.info("Please add a title for your poll by adding a 'paragraph' element.");
+                        }
+
+                        if (formParagraphs.length > 1) {
+                            setLoading(false);
+                            return toast.info("You can only have one 'paragraph' element per poll.");
+                        }
+                        
+                        const newPoll = {
+                            title: formParagraphs[0],
+                            pollChoices: options.map(option => ({ pollOption: option })),
+                        }
+                        createNewPoll(newPoll, token, createData.project_id).then(res => {
+                            console.log(res);
+                            setLoading(false);
+                            toast.success("Successfully created poll!");
+                            navigate(forwardPath);
+                        }).catch(err => {
+                            toast.error(err.response.data);
+                            setLoading(false);
+                        })
+                        return
+                    }
+
+                    const title = formData.find(formElem => formElem.element === "Header").content;
+                    
+                    if(!title) {
+                        setLoading(false);
+                        return toast.info("Please add a title for your trivia by adding a 'Header' element")
+                    }
                     const questions = [];
-                    formQuestions.forEach((question, index) => {
+                    formParagraphs.forEach((paragraph, index) => {
                         let questionFormat = {};
                         questionFormat.options = [];
-                        questionFormat.text = question;
+                        questionFormat.text = paragraph;
                         questionFormat.options.push(options[index]);
                         questions.push(questionFormat);
                     })
@@ -144,7 +183,7 @@ const CreateProject = ({ viewProgress }) => {
                     }
                     console.log(newTrivia)
 
-                    createNewTrivia(newTrivia, token, "6304fa4bc2092e93a1989d1d").then(res => {
+                    createNewTrivia(newTrivia, token, createData.project_id).then(res => {
                         console.log(res);
                         setLoading(false);
                         toast.success("Successfully created trivia!");
@@ -231,6 +270,14 @@ const CreateProject = ({ viewProgress }) => {
                                     type={"yaarnbox-max-poll-form"}
                                     />
                                 } 
+                            />
+                            <Route
+                                path="/scratchPollForm"
+                                element={<ScratchPollForm 
+                                    updateCreateData={updateCreateData}
+                                    updateNextRoute={updateNextRoute}  
+                                    createData={createData}
+                                />} 
                             />
                             <Route 
                                 path="/yaarnbox-max-questionaire-form" 

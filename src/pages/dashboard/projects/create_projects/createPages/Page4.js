@@ -8,6 +8,7 @@ const CreateForm = ({ createData, updateCreateData, updateNextRoute }) => {
 
     const [valueData, setValueData] = useState([]);
     useEffect(() => {
+        updateCreateData("formData", null);
         updateNextRoute("/dashboard/projects/create/invite");
     }, []);
 
