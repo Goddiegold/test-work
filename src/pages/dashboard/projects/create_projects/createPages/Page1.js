@@ -32,9 +32,9 @@ const CreatePage1 = ({ updateCreateData, updateNextRoute }) => {
     const onEditorStateChange = (val) => {
         console.log(convertToRaw(editorState.getCurrentContent()));
         const goal = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-        const goalStr = convertToRaw(editorState.getCurrentContent()).blocks.map(content => content.text).join("\n");
+        // const goalStr = convertToRaw(editorState.getCurrentContent()).blocks.map(content => content.text).join("\n");
         setEditorState(val);
-        updateCreateData("goal", goalStr);
+        updateCreateData("goal", goal);
     }
     const customStyles = {
         control: (styles) => ({

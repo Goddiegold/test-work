@@ -9,7 +9,13 @@ const ProjectsComponent = ({ data }) => {
         <div className="PCs_container">
             <div className="PCs_content">
                 <span className="PCs_big">{data.title}</span>
-                <span className="PCs_small">{data.goal}</span>
+                
+                {
+                    data.goal.includes("<") ? 
+                    <span className="PCs_small" dangerouslySetInnerHTML={{__html: data.goal}}></span> :
+                    <span className="PCs_small">{data.goal}</span>
+                }
+                
                 <div className="PCs_button">View</div>
                 <div className="PCs_imgs">
                     <div className="PCs_relative_img1"><img src={image} /></div>
