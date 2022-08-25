@@ -119,7 +119,7 @@ const CreateProject = ({ viewProgress }) => {
                 }
 
                 if (createData.projectType === "trivia") {
-                    // if (!createData.project_id) return navigate("/dashboard/projects/create");
+                    if (!createData.project_id) return navigate("/dashboard/projects/create");
 
                     const formData = createData.formData;
                     const title = formData.find(formElem => formElem.element === "Header").content;
