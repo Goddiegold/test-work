@@ -1,5 +1,6 @@
 import axios from "axios";
 import {toast} from "react-toastify"
+import api from "./config";
 
 function log(err) {
   console.log(err);
@@ -21,9 +22,10 @@ axios.interceptors.response.use(null, (error) => {
   return Promise.reject(error);
 });
 
-
+// baseURL:"https://qu4s5quvaz.us-east-1.awsapprunner.com/api"
 const instance = axios.create({
-    baseURL:"https://qu4s5quvaz.us-east-1.awsapprunner.com/api"
+  baseURL:api
 })
 
 export default instance;
+
