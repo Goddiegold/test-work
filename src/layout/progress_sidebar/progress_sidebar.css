@@ -1,9 +1,30 @@
-.projects .PS, 
-.projects_full .PS {
-    width: 40%;
+.PS_in, .PS_out {
+    width: 400px;
     height: 100%;
 }
-.PS {
+.PS_in {
+    animation: slideIn .5s ease-in-out;
+}
+.PS_out {
+    animation: slideOut .5s ease-in-out;
+}
+@keyframes slideIn {
+    from {
+        transform: translateX(100vw);
+    }
+    to {
+        transform: translateX(0px);
+    }
+}
+@keyframes slideOut {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(100vw);
+    }
+}
+.PS_in, .PS_out {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
@@ -13,12 +34,13 @@
     position: relative;
     font-family: 'Fira Sans';
 }
-.PS .PS_wrapper {
+.PS_in .PS_wrapper,
+.PS_out .PS_wrapper {
     width: 80%;
     /* height: 100%; */
 }
-.PS_wrapper .PS_content, .PS_content .progress,
-.progress .progress_tree, .progress_tree .progression {
+.PS_wrapper .PS_content, .PS_content .PS_progress,
+.PS_progress .PS_progress_tree, .PS_progress_tree .PS_progression {
     width: 100%;
     height: auto;
 }
@@ -30,28 +52,28 @@
     font-weight: bold;
     line-height: 1rem;
 }
-.progress {
+.PS_progress {
     display: flex;
     flex-direction: column;
     align-content: space-around;
 }
-.progress_tree {
+.PS_progress_tree {
     display: flex;
     flex-direction: column;
     align-content: space-around;
     position: relative;
     margin-top: 30px;
 }
-.progression {
+.PS_progression {
     display: flex;
     align-items: center;
     box-sizing: border-box;
     padding: 10px 0px;
 }
-.progression span, .progression div {
+.PS_progression span, .PS_progression div {
     margin-left: 10px;
 }
-.progress_info {
+.PS_progress_info {
     width: auto;
     height: auto;
     box-sizing: border-box;
@@ -61,7 +83,7 @@
     color: #2C75D3;
     font-size: 14px;
 }
-.threads {
+.PS_threads {
     position: absolute;
     z-index: 1;
     background-color: white;
@@ -89,3 +111,37 @@
     font-weight: 550;
     color: white;
 }
+@media screen and (max-width: 770px) {
+    .PS_in, .PS_out {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+        height: 100%;
+    }
+    .PS_in {
+        animation: slideIn .5s ease-in-out;
+    }
+    .PS_out {
+        animation: slideOut .5s ease-in-out;
+    }
+    @keyframes slideIn {
+        from {
+            margin-left: 100vw;
+        }
+        to {
+            margin-left: 0px;
+        }
+    }
+    @keyframes slideOut {
+        from {
+            margin-left: 0px;
+        }
+        to {
+            margin-left: 100vw;
+        }
+    }
+}
+/* @media screen and (min-width: 1071px) {
+    .PS_in, .PS_out {
+        animation: none;
+    }
+} */

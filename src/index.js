@@ -11,9 +11,14 @@ const container =   ReactDOM.createRoot(document.getElementById("root"));
 
 container.render(
     <UserContextProvider>
-      <App/>
+        <App/>
     </UserContextProvider>
 );
+// root.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>
+// );
 
 // Attach root container
 debugContextDevtool(container, {debugContext:true,debugReducer:true});

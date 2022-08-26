@@ -1,6 +1,9 @@
 header {
     width: 100%;
     position: relative;
+    z-index: 1;
+    /* overflow-x: hidden; */
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
 }
 .header {
     width: 100%;
@@ -22,6 +25,15 @@ header {
     right: 70px;
     position: absolute;
     z-index: 1000;
+}
+.profile__Dropdown {
+    height: max-content;
+}
+.profile__Dropdown > * {
+    cursor: pointer;
+}
+.profile__Dropdown ul li:hover, .profile__Dropdown ul li:focus {
+    filter: opacity(0.5);
 }
 .notifications .notifications_content {
     width: 100%;
@@ -115,17 +127,23 @@ header {
 }
 .header_input {
     margin-left: 20px;
-    width: 15rem;
-    height: auto;
-}
-.header_input input {
-    width: 100%;
+    width: 16rem;
     height: auto;
     box-sizing: border-box;
     padding: 10px;
-    outline: none;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.header_input input {
+    width: calc(100% - 50px);
+    height: auto;
+    margin-left: 6px;
+    box-sizing: border-box;
+    padding: 0px;
+    outline: none;
+    border: none;
     background: none;
 }
 .notification {

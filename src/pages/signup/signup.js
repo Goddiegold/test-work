@@ -4,7 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "./signup.css";
 import {register} from "../../services/userService";
 import { toast } from "react-toastify";
+<<<<<<< HEAD
 import logo from "../../assets/logo.png";
+=======
+
+>>>>>>> fea86c42fce29bad582f45405670e7ce6376c044
 
 const Signup = () => {
 
@@ -29,7 +33,11 @@ const navigate = useNavigate()
         e.preventDefault()
         register(user).then(res=>{
             console.log(res)
+<<<<<<< HEAD
             toast.success("Your account has been created successfully!",{position:"top-center"})
+=======
+            toast.success("Account successfully created!")
+>>>>>>> fea86c42fce29bad582f45405670e7ce6376c044
      navigate("/verify-account",{state:{usrEmail:res.data.email}})
         }).catch(err=>{
             console.log(err)
@@ -44,12 +52,16 @@ const navigate = useNavigate()
             <div className="signup_fields">
                 <div className="signup_fields_contents">
                     <div className="logo_brand">
+<<<<<<< HEAD
                     <img src={logo} alt="" style={{width:"300px",marginLeft:"-25px"}}/>
+=======
+                        <span>Yaarnbox</span>
+>>>>>>> fea86c42fce29bad582f45405670e7ce6376c044
                     </div>
                     <h2>Create an account</h2>
                     <span className="small_light"
                     style={{marginTop: "20px"}}>
-                        Some Info
+                        {/* Some Info */}
                     </span>
                     <form onSubmit={handleFormSubmit}>
                         <div className="input_field">

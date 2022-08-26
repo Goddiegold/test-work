@@ -14,3 +14,12 @@
 .button_link:hover {
     background: #68aef8;
 }
+.button_link.disabled{
+    cursor: not-allowed;
+    background: #0076F7;
+}
+@media screen and (max-width: 1024px) {
+    .button_link:hover {
+        background: #0076F7;
+    }
+}

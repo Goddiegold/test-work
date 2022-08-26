@@ -161,7 +161,7 @@ else if(userTokenDetails?.accountType==="client") return navigate("/dashboard")
                             </div>
                         </div>
                         <div className="input_field">
-                            <label>Your industry</label>
+                            <label>Your job/role</label>
                             <div className="input">
                                 <input placeholder="Enter your job role" 
                                 onChange={handleChange}
