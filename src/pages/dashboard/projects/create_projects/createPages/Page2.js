@@ -32,11 +32,13 @@ const CreatePage2 = ({ updateCreateData, updateNextRoute }) => {
 
         function animateBorderChange() {
             if (maxCount < 1) {
-                if (item === "polls") {
-                    updateNextRoute("/dashboard/projects/create/scratchPollForm");
-                    navigate("/dashboard/projects/create/scratchPollForm");
+                if (item === "polls" || item === "trivias") {
+                    let itemSingVal = item.slice(0, -1);
+                    updateNextRoute(`/dashboard/projects/create/scratch${itemSingVal.slice(0, 1).toLocaleUpperCase() + itemSingVal.slice(1).toLocaleLowerCase()}Form`);
+                    navigate(`/dashboard/projects/create/scratch${itemSingVal.slice(0, 1).toLocaleUpperCase() + itemSingVal.slice(1).toLocaleLowerCase()}Form`);
                     return
                 }
+                
                 updateNextRoute("/dashboard/projects/create/form");
                 navigate("/dashboard/projects/create/form");
                 return;
@@ -93,7 +95,7 @@ const CreatePage2 = ({ updateCreateData, updateNextRoute }) => {
                         <li className="disabled">Customer Surveys</li>
                         <li onClick={(elem) => handleScratchOptionsSelect(elem, 2, "polls")} style={{ borderColor: scratchListSelect === 2 ? "blue" : "#D9D9D9"}}>Yaarn Box Max Polls</li>
                         <li className="disabled">Yaarn Box Max Questionnaire</li>
-                        <li onClick={(elem) => handleScratchOptionsSelect(elem, 4, "trivia")} style={{ borderColor: scratchListSelect === 4 ? "blue" : "#D9D9D9"}}>Yaarn Box Max Trivia</li>
+                        <li onClick={(elem) => handleScratchOptionsSelect(elem, 4, "trivias")} style={{ borderColor: scratchListSelect === 4 ? "blue" : "#D9D9D9"}}>Yaarn Box Max Trivia</li>
                     </ul>
                 </div>
             }

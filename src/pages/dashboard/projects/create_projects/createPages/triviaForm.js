@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactFormBuilder } from "react-form-builder2";
 import "react-form-builder2/dist/app.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../create_project.css";
 
-const ScratchPollForm = ({ updateCreateData, updateNextRoute }) => {
+const ScratchTriviaForm = ({ updateCreateData, updateNextRoute }) => {
 
     const [valueData, setValueData] = useState([]);
     useEffect(() => {
@@ -12,7 +12,13 @@ const ScratchPollForm = ({ updateCreateData, updateNextRoute }) => {
         updateNextRoute("/dashboard/projects/create/invite");
     }, []);
 
-    const pollItems = [
+    const triviaItems = [
+        {
+            key: "Header",
+            name: "Header Text",
+            icon: "fas fa-heading",
+            content: "Choose Header"
+        },
         {
             key: "Paragraph",
             name: "Paragraph",
@@ -44,11 +50,11 @@ const ScratchPollForm = ({ updateCreateData, updateNextRoute }) => {
     return (
         <div className="report_content">
             <span className="report_big_txt">Create your own custom form</span>
-            <span className="report_small_txt">Create an amazing form to collect data easily for your poll</span>
+            <span className="report_small_txt">Create an amazing form to collect data easily for your trivia</span>
             <div className="form_builder">
                 <ReactFormBuilder
                     // data={valueData}
-                    toolbarItems={pollItems}
+                    toolbarItems={triviaItems}
                     onPost={handleUpdate}
                     // submitButton={<button className="form_build_button">Submit</button>}
                 /> 
@@ -57,4 +63,4 @@ const ScratchPollForm = ({ updateCreateData, updateNextRoute }) => {
     )
 }
 
-export default ScratchPollForm;
+export default ScratchTriviaForm;

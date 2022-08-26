@@ -12,38 +12,6 @@ const CreateForm = ({ createData, updateCreateData, updateNextRoute }) => {
         updateNextRoute("/dashboard/projects/create/invite");
     }, []);
 
-    useEffect(() => {
-        if (!createData.projectType) return;
-        console.log(createData)
-
-    }, [createData])
-
-    const [ triviaItems, setTriviaItems ] = useState([
-        {
-            key: "Header",
-            name: "Header Text",
-            icon: "fas fa-heading",
-            content: "Choose Header"
-        },
-        {
-            key: "Paragraph",
-            name: "Paragraph",
-            icon: "fas fa-paragraph",
-            content: "Name Paragraph"
-        },
-        {
-            key: "RadioButtons",
-            name: "Multiple Choice",
-            icon: "far fa-dot-circle",
-            options : [
-                {value: "Choice 1",key:"MC1",text:"MC1"},
-                {value: "Choice 2",key:"MC2",text:"MC2"},
-                {value: "Choice 3",key:"MC3",text:"MC3"}
-            ],
-            contents: ["MC1","MC2","MC3"]    
-        }
-    ]);
-
     const toolbarItems = [{
         key: "Header",
         name: "Header Text",
@@ -156,7 +124,7 @@ const CreateForm = ({ createData, updateCreateData, updateNextRoute }) => {
             <div className="form_builder">
                 <ReactFormBuilder
                     // data={valueData}
-                    toolbarItems={triviaItems}
+                    toolbarItems={toolbarItems}
                     onPost={handleUpdate}
                     // submitButton={<button className="form_build_button">Submit</button>}
                 /> 

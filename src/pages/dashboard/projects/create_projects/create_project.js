@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import FormTemplate from "./createPages/formTemplate";
 import { useProjectsContext } from "../../../../context/ProjectsContext";
 import ScratchPollForm from "./createPages/pollForm";
+import ScratchTriviaForm from "./createPages/triviaForm";
 
 
 const CreateProject = ({ viewProgress }) => {
@@ -119,8 +120,11 @@ const CreateProject = ({ viewProgress }) => {
                     return navigate(-1);
                 }
 
-                if (createData.projectType === "trivia" || createData.projectType === "polls") {
-                    if (!createData.project_id) return navigate("/dashboard/projects/create");
+                if (createData.projectType === "trivias" || createData.projectType === "polls") {
+                    if (!createData.project_id) {
+                        setLoading(false);
+                        return navigate("/dashboard/projects/create");
+                    }
 
                     if (!createData.formData) {
                         setLoading(false);
@@ -270,6 +274,14 @@ const CreateProject = ({ viewProgress }) => {
                                     type={"yaarnbox-max-poll-form"}
                                     />
                                 } 
+                            />
+                            <Route
+                                path="/scratchTriviaForm"
+                                element={<ScratchTriviaForm 
+                                    updateCreateData={updateCreateData}
+                                    updateNextRoute={updateNextRoute}  
+                                    createData={createData}
+                                />} 
                             />
                             <Route
                                 path="/scratchPollForm"
