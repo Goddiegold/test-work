@@ -1,0 +1,110 @@
+.VC_mid .VC_live_container,
+.VC_mid .VC_live_container_hide {
+    width: calc(100% - 401px);
+    height: 740px;
+    align-items: center;
+}
+.VC_live_container .VC_live_content,
+.VC_live_container_hide .VC_live_content {
+    width: 100%;
+    height: 80%;
+    background-color: #DFEBFF;
+}
+.VC_live_container .VC_live_bottom,
+.VC_live_container_hide .VC_live_bottom {
+    width: 100%;
+    height: 20%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0px 15px;
+}
+.VC_live_content {
+    box-sizing: border-box;
+    padding: 10px 15px;
+}
+.VC_live_content .VC_Live_video {
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+.VC_live_bottom .VC_live_bottom_div {
+    width: calc(100% - 150px);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.VC_live_bottom_div .VC_live_bottom_icons {
+    width: calc(7 * 50px);
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.VC_live_bottom_icons div {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.VC_live_bottom_icons div svg {
+    width: 25px;
+    height: 23px;
+}
+.VC_live_icon_lightblue {
+    background-color: #DFEBFF;
+}
+.VC_live_icon_blue {
+    background-color: blue;
+}
+.VC_live_record {
+    background-color: rgb(230, 136, 136);
+}
+.end_call {
+    cursor: pointer;
+    width: max-content;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 15px 30px;
+    color: white;
+    border-radius: 30px;
+    background: rgb(220, 39, 39);
+}
+@media screen and (max-width: 1000px) {
+    .VC_mid .VC_live_container {
+        width: 100%;
+    }
+    .VC_live_content {
+        box-sizing: border-box;
+        padding: 10px 10px;
+    }
+    .VC_mid .VC_live_container_hide {
+        display: none;
+    }
+}
+@media screen and (max-width: 500px) {
+    .VC_live_bottom {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: space-around;
+        box-sizing: border-box;
+        padding: 15px 0px;
+    }
+    .VC_live_bottom .VC_live_bottom_div {
+        width: 100%;
+    }
+    .end_call {
+        margin: 5px 0px 10px 0px;
+    }
+}

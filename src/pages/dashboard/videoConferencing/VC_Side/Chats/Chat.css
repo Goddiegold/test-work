@@ -1,0 +1,161 @@
+.VC_side_content .Chat {
+    width: 100%;
+    height: 500px;
+    margin-left: 1px;
+}
+.Chat .chat_select, .Chat .Chats_type {
+    width: 100%;
+}
+.Chat .Chats_type {
+    /* height: calc(100% - 70px); */
+    transition: height .6s ease-in-out;
+}
+.chat_select {
+    height: 60px;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+.chat_select .chat_select span {
+    width: 20%;
+    font-size: 16px;
+    font-weight: 500;
+}
+.chat_select .chat_select_right {
+    width: 65%;
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat_selector {
+    width: 200px;
+    height: 100%;
+    background-color: #DFEBFF;
+    border-radius: 30px;
+    overflow-x: hidden;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 2px;
+}
+.chat_selector .chat_select_value {
+    width: calc(50% - 1px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 2px);
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 10;
+}
+.chat_selector .chat_select_toggler {
+    width: calc(50% - 1px);
+    transition: margin-left .4s ease-in-out;
+    height: calc(100% - 2px);
+    border-radius: 30px;
+    cursor: pointer;
+}
+.chat_toggler {
+    cursor: pointer;
+}
+li .message_content {
+    width: auto;
+    max-width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    box-sizing: border-box;
+    margin-top: 15px;
+    padding: 10px 10px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+}
+.message_sender {
+    font-size: 13px;
+}
+.message_value {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.7rem;
+    margin-top: 1px;
+}
+.message_content .message_time {
+    width: 100%;
+    margin-top: 4px;
+    display: flex;
+    justify-content: flex-end;
+}
+.message_time span {
+    font-size: 10px;
+    color: #A8A8A8;
+    float: right;
+
+}
+.groupchat .sendmessage,
+.PC_div .sendmessage {
+    width: 100%;
+    height: 20%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sendmessage .sendmessage_wrapper {
+    width: 90%;
+    background: #F6F6F6;
+    border-radius: 30px;
+    height: 50px;
+}
+.sendmessage_wrapper .sendmessage_content {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 2px 5px 2px 15px;
+}
+.sendmessage_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sendmessage_content input {
+    width: calc(100% - 100px);
+    height: 100%;
+    box-sizing: border-box;
+    padding: 15px 10px 15px 5px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    color: #8D8F98;
+}
+.sendmessage_content .sendmessage_button {
+    width: 45px;
+    cursor: pointer;
+    height: 95%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0060FF;
+}
+@media screen and (max-width: 770px) {
+    /* .chat_select {
+        padding: 0px 20px;
+    } */
+    .chat_select .chat_select_right {
+        width: 70%;
+    }
+}
+@media screen and (max-width: 349px) {
+    .chat_select span {
+        font-size: 14px;
+        width: auto;
+    }
+    .chat_select .chat_select_right {
+        width: 85%;
+    }
+}

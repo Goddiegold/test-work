@@ -14,13 +14,8 @@ const {state} = useLocation()
 const navigate = useNavigate()
 const { verificationCode } = useParams();
     
-<<<<<<< HEAD
-// useEffect(()=>{
-//     if(!state?.usrEmail) return navigate("/login")
-// },[])
-=======
+
 useEffect(()=>{
->>>>>>> fea86c42fce29bad582f45405670e7ce6376c044
 
     if (verificationCode) {
         setCode(verificationCode);
@@ -37,11 +32,7 @@ function handleAccountVerification(codePassed){
         verifyAccount(codePassed).then(res=>{
             console.log(res)
             toast.success(res.data)
-<<<<<<< HEAD
             navigate("/login")
-=======
-            navigate("/login");
->>>>>>> fea86c42fce29bad582f45405670e7ce6376c044
         }).catch(err=>{
             console.log(err)
             toast.error(err.response.data)

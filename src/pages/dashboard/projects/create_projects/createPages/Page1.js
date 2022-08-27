@@ -130,9 +130,15 @@ const CreatePage1 = ({ updateCreateData, updateNextRoute }) => {
                 {/* <textarea placeholder="Goals Description" /> */}
             </div>
             <div className="date">
+<<<<<<< HEAD
                 {selected==="quantitative" &&<span className="big">Date</span>}
                 <div className="date_picker">
                     {selected==="quantitative" ?
+=======
+                {selected!=="qualitative" &&<span className="big">Date</span>}
+                <div className="date_picker">
+                    {selected!=="qualitative" ?
+>>>>>>> e1ef0dae6b6b5e4e134fe294d52411b950aa159f
                         <RangePicker className="range_picker"
                         onChange={(values) => {
                             const value1 = moment(values[0]).format("DD-MM-YYYY")

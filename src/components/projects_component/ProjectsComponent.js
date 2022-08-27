@@ -1,14 +1,20 @@
 import React from "react";
 import "./ProjectsComponent.css";
+import { useNavigate } from "react-router-dom";
 import image from "../../assets/Ellipse 4.png";
 import image2 from "../../assets/Ellipse 5.png";
 
-const ProjectsComponent = ({ data }) => {
-
+const ProjectsComponent = ({ data, link }) => {
+ 
+    const navigate = useNavigate();
+    const handleNav = () => {
+        navigate(link);
+    }
     return (
         <div className="PCs_container">
             <div className="PCs_content">
                 <span className="PCs_big">{data.title}</span>
+<<<<<<< HEAD
                 
                 {
                     data.goal.includes("<") ? 
@@ -17,6 +23,10 @@ const ProjectsComponent = ({ data }) => {
                 }
                 
                 <div className="PCs_button">View</div>
+=======
+                <span className="PCs_small">{data.desc}</span>
+                <div className="PCs_button" onClick={() => handleNav()}>View</div>
+>>>>>>> e1ef0dae6b6b5e4e134fe294d52411b950aa159f
                 <div className="PCs_imgs">
                     <div className="PCs_relative_img1"><img src={image} /></div>
                     <div className="PCs_absolute_img"><img src={image2} /></div>

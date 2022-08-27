@@ -1,0 +1,62 @@
+.Chats_type .groupchat {
+    width: 100%;
+    height: 100%;
+    /* margin-top: 1px; */
+}
+.groupchat {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+.groupchat .GC_messages_wrapper {
+    width: 100%;
+    height: 80%;
+    background: #F6F6F6;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    box-sizing: border-box;
+    padding: 15px 0px 10px 0px;
+    align-items: center;
+}
+.GC_messages_wrapper .GC_messages_content {
+    width: 96%;
+    height: calc(100% - 15px);
+    overflow-y: scroll;
+    display: flex;
+    justify-content: flex-start;
+    scrollbar-width: thin;
+    scrollbar-color: #0060FF #DFEBFF;
+}
+.GC_messages_content ul {
+    width: 96%;
+    height: auto;
+    list-style: none;
+    padding: 10px;
+}
+.GC_messages_content::-webkit-scrollbar {
+    width: 4px;
+    /* height: 30px; */
+}
+.GC_messages_content::-webkit-scrollbar-track {
+    background: #DFEBFF;
+}
+.GC_messages_content::-webkit-scrollbar-thumb {
+    background: #0060FF;
+    border-radius: 10px;
+    /* height: 30px;
+    min-height: 30px; */
+}
+
+.GC_messages_lists li {
+    width: 100%;
+    height: auto;
+}
+
+.isTyping {
+    font-size: 15px;
+    font-weight: 500;
+    color: #A8A8A8;
+    height: 15px;
+    margin-top: 8px;
+}

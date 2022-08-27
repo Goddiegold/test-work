@@ -38,8 +38,8 @@ function UserContextProvider({children}) {
 const token = localStorage.getItem(yaarnBoxMaxToken)
 if(token){
     console.log(token)
-    if (!userTokenDetails) return;
-    if (userTokenDetails.accountType === "new") return
+    if (!userTokenDetails?.accountType) return;
+    // if (userTokenDetails.accountType === "new") return
     getUserProfile(token,userTokenDetails.accountType).then(res=>{
         console.log(res)
         userDispatch({

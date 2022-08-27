@@ -65,11 +65,8 @@ if(userTokenDetails?.accountType&&userTokenDetails?.accountType==="client") retu
             <div className="signup_fields">
                 <div className="signup_fields_contents">
                     <div className="logo_brand">
-<<<<<<< HEAD
                        <img src={logo} alt="" style={{width:"300px",marginLeft:"-25px"}}/>
-=======
                         <span>Yaarnbox</span>
->>>>>>> fea86c42fce29bad582f45405670e7ce6376c044
                     </div>
                     <h2>Login to your account</h2>
                     <span className="small_light"
