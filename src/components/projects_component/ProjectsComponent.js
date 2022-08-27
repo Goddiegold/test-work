@@ -14,8 +14,6 @@ const ProjectsComponent = ({ data, link }) => {
         <div className="PCs_container">
             <div className="PCs_content">
                 <span className="PCs_big">{data.title}</span>
-<<<<<<< HEAD
-                
                 {
                     data.goal.includes("<") ? 
                     <span className="PCs_small" dangerouslySetInnerHTML={{__html: data.goal}}></span> :
@@ -23,10 +21,8 @@ const ProjectsComponent = ({ data, link }) => {
                 }
                 
                 <div className="PCs_button">View</div>
-=======
                 <span className="PCs_small">{data.desc}</span>
                 <div className="PCs_button" onClick={() => handleNav()}>View</div>
->>>>>>> e1ef0dae6b6b5e4e134fe294d52411b950aa159f
                 <div className="PCs_imgs">
                     <div className="PCs_relative_img1"><img src={image} /></div>
                     <div className="PCs_absolute_img"><img src={image2} /></div>

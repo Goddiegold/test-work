@@ -5,7 +5,7 @@ import Data from "./VC_data";
 import VCSide from "./VC_Side/VC_Side";
 import VCLive from "./VC_Main/VCLive";
 
-const VC = () => {
+const VideoConferencing = () => {
 
     const [participants, setParticipants] = useState(Data.participants);
     const [gcMessages, setGcMessages] = useState(Data.GC);
@@ -41,4 +41,4 @@ const VC = () => {
     )
 }
 
-export default VC;
+export default VideoConferencing;

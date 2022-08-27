@@ -32,7 +32,7 @@ const CreatePage1 = ({ updateCreateData, updateNextRoute }) => {
     const onEditorStateChange = (val) => {
         console.log(convertToRaw(editorState.getCurrentContent()));
         const goal = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-        // const goalStr = convertToRaw(editorState.getCurrentContent()).blocks.map(content => content.text).join("\n");
+        console.log(goal);
         setEditorState(val);
         updateCreateData("goal", goal);
     }
@@ -54,7 +54,7 @@ const CreatePage1 = ({ updateCreateData, updateNextRoute }) => {
 
     const handleSelection = (val) => {
         setSelected(val);
-        updateCreateData("researchType", val);
+        updateCreateData("research_type", val);
     }
 
     return (
@@ -68,13 +68,13 @@ const CreatePage1 = ({ updateCreateData, updateNextRoute }) => {
             <div className="research_type_select">
                 <span className="big">Select research type</span>
                 <div className="research_types">
-                    <div className="research_type"
+                    <div className="research_type" 
                     onClick={() => handleSelection("qualitative")}
                     style={{border: selected==="qualitative"?"1px solid blue":"1px solid #D9D9D9"}}>
                         <img src={image1} />
                         <div className="RT_texts">
                             <span className="med_thick">
-                                Qualitative Research
+                                Qualititative Research
                             </span>
                             <span className="light_thin">
                                 Create focused groups and interview sessions
@@ -130,15 +130,9 @@ const CreatePage1 = ({ updateCreateData, updateNextRoute }) => {
                 {/* <textarea placeholder="Goals Description" /> */}
             </div>
             <div className="date">
-<<<<<<< HEAD
-                {selected==="quantitative" &&<span className="big">Date</span>}
-                <div className="date_picker">
-                    {selected==="quantitative" ?
-=======
                 {selected!=="qualitative" &&<span className="big">Date</span>}
                 <div className="date_picker">
                     {selected!=="qualitative" ?
->>>>>>> e1ef0dae6b6b5e4e134fe294d52411b950aa159f
                         <RangePicker className="range_picker"
                         onChange={(values) => {
                             const value1 = moment(values[0]).format("DD-MM-YYYY")

@@ -31,6 +31,12 @@
     background-color: #FFFFFF;
     border-radius: 10px;
 }
+
+.VC_live_content .VC_Live_video video{
+width: 200px;
+    padding: 10px;
+    /* border: 2px solid black; */
+}
 .VC_live_bottom .VC_live_bottom_div {
     width: calc(100% - 150px);
     height: 100%;
