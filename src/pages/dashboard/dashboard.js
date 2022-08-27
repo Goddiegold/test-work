@@ -4,7 +4,7 @@ import Header from "../../layout/header/header";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "../../layout/sidebar/sidebar";
 import DashboardHome from "./dashboard_home/dashboard_home";
-// import ProgressSidebar from "../../layout/progress_sidebar/progress_sidebar";
+import VC from "./videoConferencing/VC";
 import Projects from "./projects/projects";
 // import Modal from "react-modal";
 // Modal.setAppElement("#root");
@@ -24,6 +24,7 @@ const Dashboard = () => {
                 <Routes>
                     <Route path="/" element={<DashboardHome full={full} />} />
                     <Route path="/projects/*" element={<Projects full={full} />} />
+                    <Route path="/video-conference" element={<VC />} />
                 </Routes>
             </div>         
         </div>

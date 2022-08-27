@@ -3,7 +3,7 @@ header {
     position: relative;
     z-index: 1;
     /* overflow-x: hidden; */
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
 .header {
     width: 100%;
@@ -14,7 +14,7 @@ header {
     justify-content: space-between;
     align-items: center;
     background: #FEFEFE;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 .notifications {
     width: 300px;
@@ -170,7 +170,7 @@ header {
         padding: 20px 10px;
     }
     .header_input {
-        width: 9rem;
+        width: 13rem;
     }
 }
 @media screen and (max-width: 380px) {

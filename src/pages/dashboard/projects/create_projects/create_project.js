@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import "./create_project.css";
+import "../projects.css";
 import Breadcrumb from "../../../../components/Breadcrumb/Breadcrumb";
+import ProgressSidebar from "../../../../layout/progress_sidebar/progress_sidebar";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Button from "../../../../components/Button/Button";
 import CreatePage1 from "./createPages/Page1";
@@ -12,7 +14,7 @@ import CreateSuccess from "./createPages/Success";
 import FormTemplate from "./createPages/formTemplate";
 
 
-const CreateProject = ({ viewProgress }) => {
+const CreateProject = () => {
     
     const path = window.location.pathname;
     const navigate = useNavigate();
@@ -26,6 +28,10 @@ const CreateProject = ({ viewProgress }) => {
             ...createData,
             [name]: value
         })
+    }
+    const [viewProgress, setViewProgress] = useState(true);
+    const toggleProgressView = () => {
+        setViewProgress(!viewProgress);
     }
     const updateNextRoute = (val) => {
         setNextRoute(val);
@@ -55,8 +61,8 @@ const CreateProject = ({ viewProgress }) => {
     
        
     return (
-        <div className={viewProgress ? "create_projects" : "create_projects_full"}>
-            <div className="create_projects_wrapper">
+        <div className="create_projects">
+            <div className={`create_projects_wrapper${viewProgress?"":"_full"}`}>
                 <div className="create_projects_content">
                     <Breadcrumb clicked={"new"} />
                     <h1>Create a project</h1>
@@ -196,9 +202,19 @@ const CreateProject = ({ viewProgress }) => {
                     </div>
                 </div>
             </div>
-            {/* // <div className="create_projects_PS">
-            //     <ProgressSidebar />
-            // </div> */}
+            <div 
+            className={viewProgress ? "PSD_toggler_full" : "PSD_toggler"}
+            onClick={() => setViewProgress(!viewProgress)}>
+                <svg width="25" height="20" viewBox="0 0 25 20" fill="none" 
+                xmlns="http://www.w3.org/2000/svg">
+                    <rect width="20" height="2" fill="white"/>
+                    <rect y="8" width="20" height="2" fill="white"/>
+                    <rect y="16" width="20" height="2" fill="white"/>
+                </svg>
+            </div>
+            {viewProgress &&
+                <ProgressSidebar viewProgress={viewProgress} />
+            }
         </div>
     )
 }

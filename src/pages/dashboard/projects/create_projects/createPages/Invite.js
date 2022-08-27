@@ -28,7 +28,7 @@ const CreateInvite = ({ createData }) => {
     const [inviteDropdown, setInviteDropdown] = useState([]);
     const inputRef = useRef();
     const dropdownRef = useRef();
-    const urlProviders = [".com",".net",".ng"]
+    const urlProviders = [".com",".net",".ng",".ru",".co.uk",".fr",".br",".in"];
     const handleButtonClick = () => {
         const fullData = {
             ...createData,

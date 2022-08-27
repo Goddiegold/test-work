@@ -1,0 +1,115 @@
+/* .PC_wrapper .PC_div_in, */
+.PC_wrapper .PC_div {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    position: absolute;
+    transition: left .6s ease-in-out;
+    background: #F6F6F6;
+    box-sizing: border-box;
+    padding: 0px 0px;
+    z-index: 20;
+}
+.PC_div_in {
+    animation: slideIn 1s;
+}
+.PC_div_out {
+    animation: slideOut 1s;
+}
+@keyframes slideIn {
+    from {
+        transform: translateX(0px)
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+@keyframes slideOut {
+    from {
+        transform: translateX(-50%)
+    }
+    to {
+        transform: translateX(0px);
+    }
+}
+/* .PC_div_in .PC_top_div, */
+.PC_div .PC_top_div {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    background-color: #FFFFFF;
+    align-items: center;
+}
+/* .PC_div_in .PC_message_lists, */
+.PC_div .PC_message_lists {
+    width: 96%;
+}
+
+.PC_top_div .arrow_back {
+    width: 40px;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(270deg);
+    cursor: pointer;
+}
+.PC_top_div span {
+    font-size: 15px;
+    margin-left: 20px;
+    font-weight: 550;
+}
+.PC_message_lists {
+    height: 70%;
+}
+.PC_message_lists ul {
+    width: 96%;
+    height: auto;
+    list-style: none;
+    padding: 10px;
+}
+.PC_message_lists::-webkit-scrollbar {
+    width: 4px;
+    /* height: 30px; */
+}
+.PC_message_lists::-webkit-scrollbar-track {
+    background: #DFEBFF;
+}
+.PC_message_lists::-webkit-scrollbar-thumb {
+    background: #0060FF;
+    border-radius: 10px;
+}
+
+.PC_message_lists li {
+    width: 100%;
+    height: auto;
+}
+
+.isTyping {
+    font-size: 15px;
+    font-weight: 500;
+    color: #A8A8A8;
+    height: 15px;
+    margin-top: 8px;
+}
+@media screen and (max-width: 770px) {
+    /* .PC_wrapper .PC_div_in, .PC_wrapper .PC_div_out {
+        width: 100vw;
+    } */
+    @keyframes slideIn {
+        from {
+            transform: translateX(0px);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+    @keyframes slideOut {
+        from {
+            transform: translateX(-100%)
+        }
+        to {
+            transform: translateX(0px);
+        }
+    }
+}

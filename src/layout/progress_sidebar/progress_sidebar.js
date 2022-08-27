@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 
 const ProgressSidebar = ({ viewProgress }) => {
     
-    const Progress = [1];
+    const check = (path) => {
+        if(path.includes("2") || path.includes("3") || path.includes("form")) return 2;
+        else if(path.includes("invite")) return 3;
+        else if(path.includes("success")) return 4;
+        else return 1;
+    }
+    const Progress = check(window.location.pathname);
 
     return (
         <div className={viewProgress ? "PS_in" : "PS_out"}>
@@ -18,49 +24,70 @@ const ProgressSidebar = ({ viewProgress }) => {
                                 xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5.5" cy="6" r="5.5" fill="white"/>
                                 </svg>
-                                <span>Base Setup</span>
-                                {Progress.length >= 1 &&
-                                    <div className="PS_progress_info">1 out of 4</div>
+                                <span 
+                                style={{fontWeight: Progress >= 1 ? "550" : "400"}}>
+                                    Base Setup</span>
+                                {Progress >= 1 &&
+                                    <div className="PS_progress_info">{Progress} out of 4</div>
                                 }
                             </div>
-                            <div className="PS_threads" style={{backgroundColor: "#6198DE"}}></div>
+                            <div className="PS_threads" 
+                            style={{backgroundColor: Progress >= 2 ? "white":"#6198DE"}}></div>
                         </div>
                         <div className="PS_progress_tree">
                             <div className="PS_progression">
                                 <svg width="10" height="10" viewBox="0 0 11 12" fill="none" 
                                 xmlns="http://www.w3.org/2000/svg" color="#6198DE">
-                                    <circle cx="5.5" cy="6" r="5.5" fill="#6198DE"/>
+                                    <circle cx="5.5" cy="6" r="5.5" 
+                                    fill={Progress >= 2 ? "white":"#6198DE"} />
                                 </svg>
-                                <span>Research Setup</span>
-                                {Progress.length >= 2 &&
+                                
+                                <span 
+                                style={{fontWeight: Progress >= 2 ? "550" : "400"}}>
+                                    Data Source
+                                </span>
+                                {/* <span>Data Source</span> */}
+                                {/* {Progress >= 2 &&
                                     <div className="PS_progress_info">2 out of 4</div>
-                                }
+                                } */}
                             </div>
-                            <div className="PS_threads" style={{backgroundColor: "#6198DE"}}></div>
+                            <div className="PS_threads" 
+                            style={{backgroundColor:  Progress >= 3 ? "white":"#6198DE"}}></div>
                         </div>
                         <div className="PS_progress_tree">
                             <div className="PS_progression">
                                 <svg width="11" height="12" viewBox="0 0 11 12" fill="none" 
                                 xmlns="http://www.w3.org/2000/svg" color="#6198DE">
-                                    <circle cx="5.5" cy="6" r="5.5" fill="#6198DE"/>
+                                    <circle cx="5.5" cy="6" r="5.5" 
+                                    fill={ Progress >= 3 ? "white":"#6198DE"}/>
                                 </svg>
-                                <span>Conferencing Tool</span>
-                                {Progress.length >= 3 &&
+                                <span 
+                                style={{fontWeight: Progress >= 3 ? "550" : "400"}}>
+                                    Invite Participants
+                                </span>
+                                {/* <span>Invite Participants</span> */}
+                                {/* {Progress >= 3 &&
                                     <div className="PS_progress_info">3 out of 4</div>
-                                }
+                                } */}
                             </div>
-                            <div className="PS_threads" style={{backgroundColor: "#6198DE"}}></div>
+                            <div className="PS_threads" 
+                            style={{backgroundColor:  Progress >= 4 ? "white":"#6198DE"}}></div>
                         </div>
                         <div className="PS_progress_tree">
                             <div className="PS_progression">
                                 <svg width="11" height="12" viewBox="0 0 11 12" fill="none" 
                                 xmlns="http://www.w3.org/2000/svg" color="#6198DE">
-                                    <circle cx="5.5" cy="6" r="5.5" fill="#6198DE"/>
+                                    <circle cx="5.5" cy="6" r="5.5" 
+                                    fill={ Progress >= 4 ? "white":"#6198DE"}/>
                                 </svg>
-                                <span>Invite Participant</span>
-                                {Progress.length >= 4 &&
+                                <span 
+                                style={{fontWeight: Progress >= 4 ? "550" : "400"}}>
+                                    Finish
+                                </span>
+                                {/* <span style={{}}>Finish</span> */}
+                                {/* {Progress >= 4 &&
                                     <div className="PS_progress_info">4 out of 4</div>
-                                }
+                                } */}
                             </div>
                         </div>
                     </div> 

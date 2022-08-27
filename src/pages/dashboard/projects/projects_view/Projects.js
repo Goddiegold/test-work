@@ -116,7 +116,8 @@ const ProjectsView = ({ viewProgress }) => {
                                         className={gridForm?"Projects_lists":"Projects_lists_full"}>
                                             {Val.map((val, idx) => (
                                                 <li className="Projects_list" key={idx}>
-                                                    <ProjectsComponent data={val} />
+                                                    <ProjectsComponent data={val} 
+                                                    link={"/dashboard/projects/video-conference"} />
                                                 </li>
                                             ))}
                                         </ul>
