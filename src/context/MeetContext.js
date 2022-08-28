@@ -1,4 +1,5 @@
 import React,{createContext, useContext, useReducer} from "react"
+import { defaultStyles } from "react-modal";
 export const MeetingContext = createContext();
 
 const initialState={
@@ -35,16 +36,33 @@ case meetActions.SET_IS_ROOM_HOST:
         isRoomHost:action.payload
     }
 case meetActions.SET_PARTICIPANTS:
-    const participants = [...state.participants,action.payload]
     return {
         ...state,
-        participants
+        participants:[...state.participants,...action.payload]
     }
 case meetActions.SET_MESSAGES:
       return {
         ...state,
         messages: action.payload,
       };
+case meetActions.SET_SOCKET_ID:
+    return {
+        ...state,
+        socketId:action.payload
+    }
+case meetActions.SET_ROOM_ID:
+    return {
+        ...state,
+        roomId:action.payload
+    }
+
+case meetActions.SET_IDENTITY:
+    return {
+        ...state,
+        identity:action.payload
+    }
+default:
+    return state;
 }
 }
 

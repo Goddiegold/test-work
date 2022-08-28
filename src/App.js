@@ -12,27 +12,20 @@ import { UserContext, yaarnBoxMaxToken, USER_PROFILE } from "./context/UserConte
 import WorkspaceSetup from "./pages/workspace_setup/workspace_setup";
 import { ProjectsContextProvider } from "./context/ProjectsContext";
 import VideoConferencing from "./pages/dashboard/videoConferencing/VC";
-import MeetContextProvider from "./context/MeetContext";
+import MeetContextProvider, { MeetingContext } from "./context/MeetContext";
+import { connectWithSocketIOServer } from "./utils/wss";
+import HomePage from "./pages/HomePage";
 
 function App() {
-  // const {userDispatch,userTokenDetails} = useContext(UserContext)
-  // useEffect(()=>{
-  // getUserProfile(userTokenDetails.token,userTokenDetails.accountType).then(res=>{
-  //   console.log(res)
-  //   userDispatch({
-  //         type:USER_PROFILE,
-  //       payload:res.data
-  //             })
-  // }).catch(err=>{
-  //   toast.error(err.response.data)
-  // })
-
-  // },[])
+  useEffect(()=>{
+connectWithSocketIOServer()
+  },[])
 
   return (
     <BrowserRouter>
       <ToastContainer />
       <Routes>
+      <Route path="/" element={<HomePage/>}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/onboarding" element={<Onboarding />} />
@@ -47,9 +40,10 @@ function App() {
         </Route>
         <Route path="/email" element={<EmailVerify />} />
         <Route path="/workspace_setup" element={<WorkspaceSetup />} />
-        <Route path="/meeting/:meetId" element={
+        <Route path="/meeting" element={
             <VideoConferencing />
         } />
+        <Route path="/join-meeting" element={<VideoConferencing/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -7,14 +7,16 @@ import reportWebVitals from './reportWebVitals';
 import UserContextProvider from './context/UserContext';
 import { debugContextDevtool } from 'react-context-devtool';
 import MeetContextProvider from './context/MeetContext';
+import {Provider} from "react-redux"
+import store from './store';
 
 const container =   ReactDOM.createRoot(document.getElementById("root"));
 
 container.render(
     <UserContextProvider>
-    <MeetContextProvider>
+    <Provider store={store}>
         <App/>
-        </MeetContextProvider>
+    </Provider>
     </UserContextProvider>
 );
 // root.render(

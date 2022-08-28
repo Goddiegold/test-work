@@ -1,8 +1,8 @@
-// import store from "../store/store";
+import { setShowOverlay, setMessages } from "../store/meeting";
+import store from "../store";
 import * as wss from "./wss";
 import Peer from "simple-peer";
 import { fetchTURNCredentials, getTurnIceServers } from "./turn";
-import { meetActions } from "../context/MeetContext";
 
 const defaultConstraints = {
   audio: true,
@@ -23,10 +23,9 @@ export const getLocalPreviewAndInitRoomConnection = async (
   isRoomHost,
   identity,
   roomId = null,
-  onlyAudio,
-  store
+  onlyAudio
 ) => {
-//   await fetchTURNCredentials();
+  await fetchTURNCredentials();
 
   const constraints = onlyAudio ? onlyAudioConstraints : defaultConstraints;
 
@@ -35,10 +34,10 @@ export const getLocalPreviewAndInitRoomConnection = async (
     .then((stream) => {
       console.log("successfuly received local stream");
       localStream = stream;
-      showLocalVideoPreview(localStream,store);
+      showLocalVideoPreview(localStream);
 
       // dispatch an action to hide overlay
-    //   store.dispatch(setShowOverlay(false));
+      store.dispatch(setShowOverlay(false));
 
       isRoomHost
         ? wss.createNewRoom(identity, onlyAudio)
@@ -143,7 +142,7 @@ export const removePeerConnection = (data) => {
 };
 
 ////////////////////////////////// UI Videos //////////////////////////////////
-const showLocalVideoPreview = (stream,store) => {
+const showLocalVideoPreview = (stream) => {
   const videosContainer = document.getElementById("VC_Live_video");
   videosContainer.classList.add("videos_portal_styles");
   const videoContainer = document.createElement("div");
@@ -159,14 +158,14 @@ const showLocalVideoPreview = (stream,store) => {
 
   videoContainer.appendChild(videoElement);
 
-  if (store.connectOnlyWithAudio) {
+  if (store.getState().connectOnlyWithAudio) {
     videoContainer.appendChild(getAudioOnlyLabel());
   }
 
   videosContainer.appendChild(videoContainer);
 };
 
-const addStream = (stream, connUserSocketId,store) => {
+const addStream = (stream, connUserSocketId) => {
   //display incoming stream
   const videosContainer = document.getElementById("videos_portal");
   const videoContainer = document.createElement("div");
@@ -193,7 +192,7 @@ const addStream = (stream, connUserSocketId,store) => {
   videoContainer.appendChild(videoElement);
 
   // check if other user connected only with audio
-  const participants = store.participants;
+  const participants = store.getState().participants;
 
   const participant = participants.find((p) => p.socketId === connUserSocketId);
   console.log(participant);
@@ -260,14 +259,14 @@ const switchVideoTracks = (stream) => {
 };
 
 ////////////////////////////////// Messages /////////////////////////////////////
-const appendNewMessage = (messageData,store,storeDispatch) => {
-  const messages = store.messages;
-  storeDispatch({type:meetActions.SET_MESSAGES,payload:[...messages, messageData]});
+const appendNewMessage = (messageData) => {
+  const messages = store.getState().messages;
+  store.dispatch(setMessages([...messages, messageData]));
 };
 
-export const sendMessageUsingDataChannel = (messageContent,store) => {
+export const sendMessageUsingDataChannel = (messageContent) => {
   // append this message locally
-  const identity = store.identity;
+  const identity = store.getState().identity;
 
   const localMessageData = {
     content: messageContent,

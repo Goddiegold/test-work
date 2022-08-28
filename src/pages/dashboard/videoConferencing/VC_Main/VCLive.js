@@ -1,18 +1,21 @@
 import React, { useContext, useEffect ,useState} from "react";
 import SVGs from "../../../../assets/SVGs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams,useLocation } from "react-router-dom";
 import "./VCLive.css";
 import * as webRTCHandler from "../../../../utils/webRTCHandler";
 import Video from "./Video";
-import { MeetingContext } from "../../../../context/MeetContext";
+import {useDispatch,useSelector} from "react-redux";
+import { setRoomId } from "../../../../store/meeting";
+import store from "../../../../store";
 const constraints = {
     audio: false,
     video: true,
   };
 const VCLive = ({ participants, showSide, showSideView }) => {
-    const {meet} = useContext(MeetingContext)
     const navigate = useNavigate();
     let data=[1,2,3]
+    const dispatch = useDispatch()
+    const {isRoomHost,identity,roomId} = useSelector(state=>state)
     const [screenSharingStream, setScreenSharingStream] = useState(null);
     const [isScreenSharingActive, setIsScreenSharingActive] = useState(false);
     const handleScreenShareToggle = async () => {
@@ -41,12 +44,19 @@ const VCLive = ({ participants, showSide, showSideView }) => {
           setScreenSharingStream(null);
         }
       };
-
-    useEffect(()=>{
-webRTCHandler.getLocalPreviewAndInitRoomConnection(null,null,null,null,meet)
+      const {search,pathname} = useLocation()
+    
+      // const isRoomHost = new URLSearchParams(search).get("host");
+    useEffect(async ()=>{
+      if(pathname==="/join-meeting") {
+        var meetId = prompt("Enter meet Id")
+        dispatch(setRoomId(meetId))
+    }
+   webRTCHandler.getLocalPreviewAndInitRoomConnection(isRoomHost,identity,roomId,null)
+    console.log(store.getState())
     },[])
 
-    return (
+    return ( 
         <div 
         className={`VC_live_container${showSide?"_hide":""}`}>
             <div className="VC_live_content">

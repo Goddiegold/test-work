@@ -51,6 +51,11 @@ export async function createNewPoll(data, token, projectId){
     return await http.post(`/users/clients/project-poll/${projectId}`, data, headers(token))
 }
 
+export const joinRoomMeeting = async (roomId) => await http.get(`/users/participants/join-room/${roomId}`)
+
+export const getTURNCredentials = async () => {
+    return await http.get(`/get-turn-credentials`);
+  };
     export function decodeUserToken(token){
         try{
             if(token) return {...jwtDecode(token),token}

@@ -1,9 +1,10 @@
-import * as api from "./api";
+import { getTURNCredentials } from "../services/userService";
+
 
 let TURNIceServers = null;
 
 export const fetchTURNCredentials = async () => {
-  const responseData = await api.getTURNCredentials();
+  const responseData = await getTURNCredentials();
 
   if (responseData.token?.iceServers) {
     TURNIceServers = responseData.token.iceServers;
